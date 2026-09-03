@@ -8,10 +8,13 @@
     "render:intro": "remotion render src/index.ts IntroOutro out/intro.mp4",
     "render:lower-third": "remotion render src/index.ts LowerThird out/lower-third.mp4",
     "render:case-study": "remotion render src/index.ts CaseStudy out/case-study.mp4",
+    "render:batch": "node scripts/batch-render.mjs",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {
+    "@remotion/bundler": "4.0.520",
     "@remotion/cli": "4.0.520",
+    "@remotion/renderer": "4.0.520",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "remotion": "4.0.520",

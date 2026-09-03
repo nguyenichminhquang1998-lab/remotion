@@ -1,0 +1,32 @@
+[
+	{
+		"compositionId": "IntroOutro",
+		"outName": "intro-cafe-hai-an",
+		"props": {
+			"clientName": "Cafe Hai An",
+			"tagline": "A film by XQuang",
+			"mode": "intro",
+			"accentColor": "#d4af37"
+		}
+	},
+	{
+		"compositionId": "IntroOutro",
+		"outName": "intro-nha-hang-song-hong",
+		"props": {
+			"clientName": "Nha Hang Song Hong",
+			"tagline": "Directed by XQuang",
+			"mode": "intro",
+			"accentColor": "#c0392b"
+		}
+	},
+	{
+		"compositionId": "IntroOutro",
+		"outName": "intro-boutique-hp",
+		"props": {
+			"clientName": "Boutique Hai Phong",
+			"tagline": "A film by XQuang",
+			"mode": "intro",
+			"accentColor": "#2c3e50"
+		}
+	}
+]

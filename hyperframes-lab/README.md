@@ -14,6 +14,16 @@ npm run render   # xuất renders/case-study.mp4
 
 Cần cài `ffmpeg` trên máy nếu chưa có (`sudo apt install ffmpeg` trên Linux, `brew install ffmpeg` trên Mac). Windows: tải từ ffmpeg.org. Không cần cài GSAP riêng — đã vendor sẵn trong `vendor/gsap.min.js`.
 
+### Render hàng loạt (nhiều biến thể)
+
+Composition `CaseStudy` đã khai báo `data-composition-variables` (tiêu đề, màu accent, 3 bộ số liệu) nên hỗ trợ render hàng loạt sẵn có của Hyperframes:
+
+```
+npm run render:batch
+```
+
+Đọc danh sách từ `data/batch-example.json` (định dạng `{"rows": [...]}`, mỗi dòng là 1 video với tên file riêng qua field `outputName`), ra file trong `renders/`. Nhờ Claude Code sửa file JSON này theo dữ liệu khách hàng thật — mở giao diện Studio (`npm run dev`) cũng thấy đúng các trường này trong bảng props để chỉnh tay nếu muốn.
+
 ## Kết quả so sánh sau khi test thật (không phải lý thuyết)
 
 | Tiêu chí | Remotion | Hyperframes |

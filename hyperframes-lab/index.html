@@ -1,5 +1,20 @@
 <!doctype html>
-<html lang="en">
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"title","type":"string","label":"Tieu de","default":"Ket qua chien dich"},
+    {"id":"accentColor","type":"color","label":"Mau accent","default":"#d4af37"},
+    {"id":"stat0Value","type":"number","label":"So lieu 1 - gia tri","default":850},
+    {"id":"stat0Suffix","type":"string","label":"So lieu 1 - hau to","default":"K"},
+    {"id":"stat0Label","type":"string","label":"So lieu 1 - nhan","default":"Luot xem"},
+    {"id":"stat1Value","type":"number","label":"So lieu 2 - gia tri","default":12},
+    {"id":"stat1Suffix","type":"string","label":"So lieu 2 - hau to","default":"%"},
+    {"id":"stat1Label","type":"string","label":"So lieu 2 - nhan","default":"Ty le tuong tac"},
+    {"id":"stat2Value","type":"number","label":"So lieu 3 - gia tri","default":34},
+    {"id":"stat2Suffix","type":"string","label":"So lieu 3 - hau to","default":""},
+    {"id":"stat2Label","type":"string","label":"So lieu 3 - nhan","default":"Khach hang moi"}
+  ]'
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
@@ -45,7 +60,7 @@
       .stat-num {
         font-size: 72px;
         font-weight: 700;
-        color: #d4af37;
+        color: var(--accentColor, #d4af37);
         font-variant-numeric: tabular-nums;
       }
       .stat-label {
@@ -65,7 +80,14 @@
       data-width="1920"
       data-height="1080"
     >
-      <div id="title" class="clip" data-start="0" data-duration="5" data-track-index="0">
+      <div
+        id="title"
+        class="clip"
+        data-start="0"
+        data-duration="5"
+        data-track-index="0"
+        data-var-text="title"
+      >
         Ket qua chien dich
       </div>
 
@@ -94,12 +116,18 @@
         gsap.set("#title", { opacity: 0, y: 20 });
         tl.to("#title", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0);
 
+        // Doc gia tri tu variables (ho tro `hyperframes render --batch` va Studio props panel)
+        var vars = window.__hyperframes.getVariables();
+
         // Count-up recipe (seek-safe: driven by the paused GSAP timeline, not real time)
         var stats = [
-          { id: "stat-0", value: 850, suffix: "K" },
-          { id: "stat-1", value: 12, suffix: "%" },
-          { id: "stat-2", value: 34, suffix: "" },
+          { id: "stat-0", value: vars.stat0Value, suffix: vars.stat0Suffix },
+          { id: "stat-1", value: vars.stat1Value, suffix: vars.stat1Suffix },
+          { id: "stat-2", value: vars.stat2Value, suffix: vars.stat2Suffix },
         ];
+        document.querySelector("#stats .stat:nth-child(1) .stat-label").textContent = vars.stat0Label;
+        document.querySelector("#stats .stat:nth-child(2) .stat-label").textContent = vars.stat1Label;
+        document.querySelector("#stats .stat:nth-child(3) .stat-label").textContent = vars.stat2Label;
 
         stats.forEach(function (stat, i) {
           var el = document.getElementById(stat.id);

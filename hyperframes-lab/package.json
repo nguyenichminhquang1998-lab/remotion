@@ -6,6 +6,7 @@
     "dev": "npx --yes hyperframes@0.8.27 preview",
     "check": "npx --yes hyperframes@0.8.27 check",
     "render": "npx --yes hyperframes@0.8.27 render",
+    "render:batch": "npx --yes hyperframes@0.8.27 render . --batch data/batch-example.json --output \"renders/{outputName}.mp4\"",
     "publish": "npx --yes hyperframes@0.8.27 publish"
   }
 }

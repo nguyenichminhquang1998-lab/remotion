@@ -44,6 +44,16 @@ npm run render:case-study    # xuất CaseStudy -> out/case-study.mp4
 
 Muốn đổi nội dung mặc định (tên khách, số liệu...) trước khi render hàng loạt, sửa phần `defaultProps` trong `src/Root.tsx` — hoặc **nhờ Claude Code sửa hộ bằng cách mô tả bằng lời**, ví dụ: "đổi tên khách trong IntroOutro thành 'Cafe Hải An', tagline thành 'Directed by XQuang'".
 
+### Render hàng loạt (nhiều biến thể cùng lúc)
+
+Đúng nhu cầu "tạo nhiều biến thể video ads nhanh" — thay vì render từng cái một, đưa 1 danh sách khách hàng/nội dung vào `data/batch-example.json` rồi chạy:
+
+```
+npm run render:batch
+```
+
+Mỗi dòng trong file JSON là 1 video, ra file riêng trong `out/batch/`. Nhờ Claude Code sửa file JSON này theo danh sách khách hàng thật của bạn — không cần đụng vào code render.
+
 ## Khi cần template mới
 
 Không tự viết code. Mở Claude Code, mô tả bằng tiếng Việt những gì bạn muốn, ví dụ:
@@ -58,4 +68,12 @@ Mỗi lần dùng template thay vì dựng tay, ghi lại: tên job, template d�
 
 ## Thử nghiệm song song: Hyperframes
 
-Thư mục `hyperframes-lab/` chứa bản dựng lại template `CaseStudy` bằng Hyperframes (framework HTML/CSS của HeyGen) để so sánh trực tiếp với Remotion trên cùng use case. Xem `hyperframes-lab/README.md` để biết kết quả so sánh và đánh giá — tóm tắt: **Remotion vẫn là công cụ chính cho Phase 1** (đơn giản hơn cho người không biết code), Hyperframes đáng cân nhắc sau này khi cần loại nội dung phức tạp mà kho block cộng đồng của nó (`hyperframes catalog`) có sẵn.
+Thư mục `hyperframes-lab/` chứa bản dựng lại template `CaseStudy` bằng Hyperframes (framework HTML/CSS của HeyGen) để so sánh trực tiếp với Remotion trên cùng use case. Xem `hyperframes-lab/README.md` để biết kết quả so sánh và đánh giá — tóm tắt: **Remotion vẫn là công cụ chính** (team ≤3 người cố định nên free license của Remotion không bao giờ hết hạn), Hyperframes đáng cân nhắc sau này khi cần loại nội dung phức tạp mà kho block cộng đồng của nó (`hyperframes catalog`) có sẵn. Hyperframes cũng đã hỗ trợ render hàng loạt (`npm run render:batch` trong `hyperframes-lab/`, dùng `data/batch-example.json`).
+
+## Mở rộng bộ công cụ AI (đang chờ XQuang tự đăng ký)
+
+Ngoài Remotion/Hyperframes, kế hoạch mở rộng gồm:
+
+- **Higgsfield Soul** (thay Arcads, $15-19/th thay vì $110/th) — dùng cho UGC ads. Free trial trước khi trả tiền, dùng theo `HIGGSFIELD-TEST-CHECKLIST.md` để test đúng trọng tâm (nhân vật nhất quán, lipsync tiếng Việt) trước khi quyết định trả phí.
+- **Magnific MCP** — đã scaffold sẵn `.mcp.json` trong repo, khi bạn có tài khoản Magnific (Premium ~520k/tháng, không có gói free cho MCP) chỉ cần đăng nhập OAuth trong Claude Code là dùng được ngay, không cần cấu hình lại.
+- Topaz Photo/Video AI, ElevenLabs, Descript/Opus Clip — công cụ bổ sung cho nâng ảnh/video, lồng tiếng, cắt short. Hỏi lại Claude Code bất cứ lúc nào để tóm tắt lý do chọn và giá hiện tại của từng cái.
