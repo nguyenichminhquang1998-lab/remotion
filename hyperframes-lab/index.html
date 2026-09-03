@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="vendor/gsap.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0a0a0a;
+      }
+      body {
+        font-family: "Helvetica", "Arial", sans-serif;
+      }
+      #root {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #title {
+        font-family: Georgia, serif;
+        font-size: 40px;
+        color: #ffffff;
+        margin-bottom: 60px;
+      }
+      #stats {
+        display: flex;
+        gap: 80px;
+      }
+      .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .stat-num {
+        font-size: 72px;
+        font-weight: 700;
+        color: #d4af37;
+        font-variant-numeric: tabular-nums;
+      }
+      .stat-label {
+        font-size: 20px;
+        color: #ffffff;
+        opacity: 0.85;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="5"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="title" class="clip" data-start="0" data-duration="5" data-track-index="0">
+        Ket qua chien dich
+      </div>
+
+      <div id="stats" class="clip" data-start="0" data-duration="5" data-track-index="1">
+        <div class="stat">
+          <div class="stat-num" id="stat-0">0K</div>
+          <div class="stat-label">Luot xem</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="stat-1">0%</div>
+          <div class="stat-label">Ty le tuong tac</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="stat-2">0</div>
+          <div class="stat-label">Khach hang moi</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+
+        // Title fade + rise, matches Remotion IntroOutro/CaseStudy title timing
+        gsap.set("#title", { opacity: 0, y: 20 });
+        tl.to("#title", { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }, 0);
+
+        // Count-up recipe (seek-safe: driven by the paused GSAP timeline, not real time)
+        var stats = [
+          { id: "stat-0", value: 850, suffix: "K" },
+          { id: "stat-1", value: 12, suffix: "%" },
+          { id: "stat-2", value: 34, suffix: "" },
+        ];
+
+        stats.forEach(function (stat, i) {
+          var el = document.getElementById(stat.id);
+          var startTime = 0.5 + i * 0.25; // same 0.25s stagger as Remotion version
+          var driver = { v: 0 };
+
+          gsap.set(el.parentElement, { opacity: 0, y: 20 });
+          tl.to(el.parentElement, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, startTime);
+          tl.to(
+            driver,
+            {
+              v: stat.value,
+              duration: 0.8,
+              ease: "power2.out",
+              onUpdate: function () {
+                el.textContent = Math.round(driver.v) + stat.suffix;
+              },
+            },
+            startTime,
+          );
+        });
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

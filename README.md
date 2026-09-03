@@ -55,3 +55,7 @@ Claude Code sẽ tạo file mới trong `src/templates/`, đăng ký vào `src/R
 ## Ghi lại ROI (để đưa vào production-analytics sau)
 
 Mỗi lần dùng template thay vì dựng tay, ghi lại: tên job, template dùng, thời gian dựng tay ước tính vs. thời gian dùng template. Dữ liệu này dùng để đánh giá Phase 1 có đáng tiếp tục đầu tư không trước khi qua Phase 2 (Magnific).
+
+## Thử nghiệm song song: Hyperframes
+
+Thư mục `hyperframes-lab/` chứa bản dựng lại template `CaseStudy` bằng Hyperframes (framework HTML/CSS của HeyGen) để so sánh trực tiếp với Remotion trên cùng use case. Xem `hyperframes-lab/README.md` để biết kết quả so sánh và đánh giá — tóm tắt: **Remotion vẫn là công cụ chính cho Phase 1** (đơn giản hơn cho người không biết code), Hyperframes đáng cân nhắc sau này khi cần loại nội dung phức tạp mà kho block cộng đồng của nó (`hyperframes catalog`) có sẵn.
