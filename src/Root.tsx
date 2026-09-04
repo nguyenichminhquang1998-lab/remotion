@@ -2,6 +2,7 @@ import {Composition} from 'remotion';
 import {IntroOutro, introOutroSchema} from './templates/IntroOutro';
 import {LowerThird, lowerThirdSchema} from './templates/LowerThird';
 import {CaseStudy, caseStudySchema} from './templates/CaseStudy';
+import {BeFastPromo, beFastPromoSchema} from './templates/BeFastPromo';
 
 export const Root: React.FC = () => {
 	return (
@@ -51,6 +52,22 @@ export const Root: React.FC = () => {
 						{label: 'Khach hang moi', value: 34, suffix: ''},
 					],
 					accentColor: '#d4af37',
+				}}
+			/>
+			<Composition
+				id="BeFastPromo"
+				component={BeFastPromo}
+				durationInFrames={180}
+				fps={30}
+				width={1080}
+				height={1920}
+				schema={beFastPromoSchema}
+				defaultProps={{
+					brandName: 'BeFAST',
+					tagline: 'With Colostrum',
+					ingredients: 'Extrafolate-S, Omega-3 ALA, Phosphatidylserine',
+					flavour: 'Vanilla Flavour',
+					originBadge: 'New Zealand Made',
 				}}
 			/>
 		</>
