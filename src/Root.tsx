@@ -57,7 +57,7 @@ export const Root: React.FC = () => {
 			<Composition
 				id="BeFastPromo"
 				component={BeFastPromo}
-				durationInFrames={180}
+				durationInFrames={288}
 				fps={30}
 				width={1080}
 				height={1920}
@@ -68,6 +68,34 @@ export const Root: React.FC = () => {
 					ingredients: 'Extrafolate-S, Omega-3 ALA, Phosphatidylserine',
 					flavour: 'Vanilla Flavour',
 					originBadge: 'New Zealand Made',
+					netWeight: '650G',
+					benefits: [
+						{
+							icon: 'heart',
+							label: 'Omega-3 ALA',
+							description: 'Supports healthy heart and vascular function',
+						},
+						{
+							icon: 'brain',
+							label: 'Phosphatidylserine',
+							description: 'Supports normal brain function',
+						},
+						{
+							icon: 'shield',
+							label: 'Colostrum',
+							description: 'A natural source of immunoglobulins',
+						},
+						{
+							icon: 'ribbon',
+							label: 'Extrafolate-S',
+							description: 'Supports normal homocysteine metabolism',
+						},
+					],
+					stats: [
+						{label: 'Vitamin C', value: 89, suffix: '%'},
+						{label: 'Folic Acid', value: 88, suffix: '%'},
+						{label: 'Calcium', value: 49, suffix: '%'},
+					],
 				}}
 			/>
 		</>
