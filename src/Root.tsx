@@ -16,7 +16,7 @@ export const Root: React.FC = () => {
 				height={1080}
 				schema={introOutroSchema}
 				defaultProps={{
-					clientName: 'Ten Khach Hang',
+					clientName: 'Tên Khách Hàng',
 					tagline: 'A film by XQuang',
 					mode: 'intro',
 					accentColor: '#d4af37',
@@ -32,7 +32,7 @@ export const Root: React.FC = () => {
 				schema={lowerThirdSchema}
 				defaultProps={{
 					name: 'Nguyen Van A',
-					subtitle: 'Giam doc sang tao',
+					subtitle: 'Giám đốc sáng tạo',
 					accentColor: '#d4af37',
 				}}
 			/>
@@ -45,11 +45,11 @@ export const Root: React.FC = () => {
 				height={1080}
 				schema={caseStudySchema}
 				defaultProps={{
-					title: 'Ket qua chien dich',
+					title: 'Kết quả chiến dịch',
 					stats: [
-						{label: 'Luot xem', value: 850, suffix: 'K'},
-						{label: 'Ty le tuong tac', value: 12, suffix: '%'},
-						{label: 'Khach hang moi', value: 34, suffix: ''},
+						{label: 'Lượt xem', value: 850, suffix: 'K'},
+						{label: 'Tỷ lệ tương tác', value: 12, suffix: '%'},
+						{label: 'Khách hàng mới', value: 34, suffix: ''},
 					],
 					accentColor: '#d4af37',
 				}}

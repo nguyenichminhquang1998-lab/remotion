@@ -2,45 +2,45 @@
 	"rows": [
 		{
 			"outputName": "case-study-cafe-hai-an",
-			"title": "Ket qua chien dich - Cafe Hai An",
+			"title": "Kết quả chiến dịch - Café Hải An",
 			"accentColor": "#d4af37",
 			"stat0Value": 850,
 			"stat0Suffix": "K",
-			"stat0Label": "Luot xem",
+			"stat0Label": "Lượt xem",
 			"stat1Value": 12,
 			"stat1Suffix": "%",
-			"stat1Label": "Ty le tuong tac",
+			"stat1Label": "Tỷ lệ tương tác",
 			"stat2Value": 34,
 			"stat2Suffix": "",
-			"stat2Label": "Khach hang moi"
+			"stat2Label": "Khách hàng mới"
 		},
 		{
 			"outputName": "case-study-nha-hang-song-hong",
-			"title": "Ket qua chien dich - Nha Hang Song Hong",
+			"title": "Kết quả chiến dịch - Nhà Hàng Sông Hồng",
 			"accentColor": "#c0392b",
 			"stat0Value": 420,
 			"stat0Suffix": "K",
-			"stat0Label": "Luot xem",
+			"stat0Label": "Lượt xem",
 			"stat1Value": 8,
 			"stat1Suffix": "%",
-			"stat1Label": "Ty le tuong tac",
+			"stat1Label": "Tỷ lệ tương tác",
 			"stat2Value": 21,
 			"stat2Suffix": "",
-			"stat2Label": "Khach hang moi"
+			"stat2Label": "Khách hàng mới"
 		},
 		{
 			"outputName": "case-study-boutique-hp",
-			"title": "Ket qua chien dich - Boutique Hai Phong",
+			"title": "Kết quả chiến dịch - Boutique Hải Phòng",
 			"accentColor": "#2c3e50",
 			"stat0Value": 1200,
 			"stat0Suffix": "K",
-			"stat0Label": "Luot xem",
+			"stat0Label": "Lượt xem",
 			"stat1Value": 15,
 			"stat1Suffix": "%",
-			"stat1Label": "Ty le tuong tac",
+			"stat1Label": "Tỷ lệ tương tác",
 			"stat2Value": 47,
 			"stat2Suffix": "",
-			"stat2Label": "Khach hang moi"
+			"stat2Label": "Khách hàng mới"
 		}
 	]
 }

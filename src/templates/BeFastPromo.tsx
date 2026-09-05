@@ -297,7 +297,7 @@ export const BeFastPromo: React.FC<Props> = ({
 				}}
 			>
 				<div style={{fontSize: 30, fontWeight: 700, color: PURPLE, marginBottom: 48}}>
-					% Nhu cau dinh duong hang ngay (%DI) *
+					% Nhu cầu dinh dưỡng hằng ngày (%DI) *
 				</div>
 				<div style={{display: 'flex', gap: 60}}>
 					{stats.map((s, i) => {
@@ -340,7 +340,7 @@ export const BeFastPromo: React.FC<Props> = ({
 					})}
 				</div>
 				<div style={{fontSize: 14, color: '#6b5a80', marginTop: 40}}>
-					*Tren khau phan an trung binh 8700kJ
+					*Trên khẩu phần ăn trung bình 8700kJ
 				</div>
 			</AbsoluteFill>
 
