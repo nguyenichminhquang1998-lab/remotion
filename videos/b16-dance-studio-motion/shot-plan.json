@@ -1,0 +1,36 @@
+{
+  "category": "kinetic-type",
+  "duration_s": 4,
+  "fps": 30,
+  "canvas": { "w": 1920, "h": 1080, "aspect": "16:9" },
+  "style": "Minimal brand lockup. Solid black wordmark, pure alpha background, no decoration — the 3D spin is the entire motif. Confident, punchy, dance-studio energy.",
+  "palette": ["#0A0A0A"],
+  "font": "Anton (B16, bold condensed) + Archivo (DANCE STUDIO, wide-tracked)",
+  "beats": [2.5],
+  "export": "alpha-overlay",
+
+  "asset_needs": [],
+
+  "block": null,
+  "customize": {},
+
+  "content": {
+    "scenes": [
+      {
+        "id": "spin-reveal",
+        "start": 0,
+        "end": 4,
+        "text": "B16 DANCE STUDIO",
+        "emphasis_words": ["B16"],
+        "emotion": "confident, punchy, brand-forward",
+        "motion": "rotate_y_settle — hand-authored gap (catalog search-miss logged): lockup spins in place around the vertical (Y) axis, two full turns decelerating into a forward-facing hold; no positional movement, rotation only",
+        "beats": [2.5]
+      }
+    ]
+  },
+
+  "notes": {
+    "source": "Recreated as live HTML/CSS text from the B16 Dance Studio logo (not a raster cutout) — this session's Adobe background-removal cutout only captured \"B16\" (subject-select dropped \"DANCE STUDIO\"), and the environment's egress policy blocks downloading the Adobe-hosted PNG into this project anyway. Live text also renders sharp at any rotation angle, unlike a raster cutout which would alias under 3D perspective.",
+    "catalog_search_miss": "npx hyperframes feedback --search-miss \"3D horizontal rotation spin text logo in place\" logged — no registry block does an in-place rotateY spin-and-settle for a wordmark."
+  }
+}
