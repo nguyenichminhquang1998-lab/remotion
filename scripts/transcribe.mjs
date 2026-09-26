@@ -58,9 +58,23 @@ const wavPath = path.join(tmpDir, `${baseName}.wav`);
 const outputJsonPath = path.join(projectRoot, 'public', `${baseName}-captions.json`);
 
 mkdirSync(tmpDir, {recursive: true});
+mkdirSync(whisperDir, {recursive: true});
 
 console.log('1/4 — Cai Whisper.cpp (lan dau se tai ve, cac lan sau dung lai)...');
-await installWhisperCpp({to: whisperDir, version: '1.5.5'});
+// @remotion/install-whisper-cpp downloads the zip to `path.join(process.cwd(),
+// "whisper-bin-x64.zip")` (hardcoded, not something the `to` option controls),
+// then unzips it with Windows' Expand-Archive. If process.cwd() has a space
+// in it anywhere (e.g. a Windows username like "My PC"), that download path
+// alone breaks Expand-Archive even when `to` itself is space-free. Work
+// around it by temporarily cd-ing into whisperDir (already guaranteed
+// space-free when WHISPER_CPP_DIR is set) just for this one call.
+const originalCwd = process.cwd();
+process.chdir(whisperDir);
+try {
+	await installWhisperCpp({to: whisperDir, version: '1.5.5'});
+} finally {
+	process.chdir(originalCwd);
+}
 
 console.log(`2/4 — Tai model "${model}" (lan dau se tai ve, cac lan sau dung lai)...`);
 await downloadWhisperModel({model, folder: whisperDir});
