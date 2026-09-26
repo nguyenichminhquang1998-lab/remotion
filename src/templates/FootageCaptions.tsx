@@ -74,7 +74,7 @@ export const FootageCaptions: React.FC<Props> = ({
 	captionsFileName,
 	accentColor,
 }) => {
-	const {fps} = useVideoConfig();
+	const {fps, durationInFrames: compositionDurationInFrames} = useVideoConfig();
 	const [captions, setCaptions] = useState<Caption[] | null>(null);
 	const {delayRender, continueRender} = useDelayRender();
 	const [handle] = useState(() => delayRender('Loading captions JSON'));
@@ -110,11 +110,16 @@ export const FootageCaptions: React.FC<Props> = ({
 			{pages.map((page, index) => {
 				const nextPage = pages[index + 1] ?? null;
 				const startFrame = Math.round((page.startMs / 1000) * fps);
+				// Show each page for its own real span (until the next page
+				// starts), not capped at SWITCH_CAPTIONS_EVERY_MS. That cap only
+				// controls how createTikTokStyleCaptions groups tokens into
+				// pages — Vietnamese speech gets split into syllable tokens
+				// without a leading space (e.g. "ất", "ọi"), which can push a
+				// page's real span past that nominal value. Capping the display
+				// duration here too was cutting off trailing words and leaving
+				// a blank gap while the speaker kept talking.
 				const endFrame = Math.round(
-					Math.min(
-						nextPage ? (nextPage.startMs / 1000) * fps : Infinity,
-						startFrame + (SWITCH_CAPTIONS_EVERY_MS / 1000) * fps,
-					),
+					nextPage ? (nextPage.startMs / 1000) * fps : compositionDurationInFrames,
 				);
 				const durationInFrames = endFrame - startFrame;
 
