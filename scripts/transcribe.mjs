@@ -49,7 +49,7 @@ const baseName = path.parse(inputArg).name;
 // breaks when any part of the path contains a space — including a Windows
 // username with a space (e.g. "C:\Users\My PC\..."), which is outside this
 // project's control. Allow overriding the install location to sidestep it:
-//   WHISPER_CPP_DIR="C:/whisper-cpp" npm run transcribe -- "video.mp4"
+//   WHISPER_CPP_DIR="C:/remotion-tools/whisper-cpp" npm run transcribe -- "video.mp4"
 const whisperDir = process.env.WHISPER_CPP_DIR
 	? path.resolve(process.env.WHISPER_CPP_DIR)
 	: path.join(projectRoot, 'whisper.cpp');
@@ -62,7 +62,10 @@ mkdirSync(tmpDir, {recursive: true});
 // already-existing `to` folder as "a previous install is here" and refuses
 // to proceed if it's missing the binary. Expand-Archive creates the
 // destination folder on its own, so only its parent needs to exist.
-mkdirSync(path.dirname(whisperDir), {recursive: true});
+// Guarded: mkdirSync on a drive root like "C:\" throws EPERM on Windows.
+if (!existsSync(path.dirname(whisperDir))) {
+	mkdirSync(path.dirname(whisperDir), {recursive: true});
+}
 
 console.log('1/4 — Cai Whisper.cpp (lan dau se tai ve, cac lan sau dung lai)...');
 // @remotion/install-whisper-cpp downloads the zip to `path.join(process.cwd(),
