@@ -9,3 +9,8 @@ renders
 # media, not code — keep it out of git. .gitkeep keeps the folder itself.
 public/*
 !public/.gitkeep
+
+# Whisper.cpp binary + downloaded model, and its scratch files — large
+# binaries, re-downloaded automatically by scripts/transcribe.mjs.
+whisper.cpp
+.tmp-transcribe

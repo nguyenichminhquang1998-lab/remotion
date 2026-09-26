@@ -13,6 +13,7 @@ import {
 	FootageLowerThird,
 	footageLowerThirdSchema,
 } from './templates/FootageLowerThird';
+import {FootageCaptions, footageCaptionsSchema} from './templates/FootageCaptions';
 
 export const Root: React.FC = () => {
 	return (
@@ -156,14 +157,39 @@ export const Root: React.FC = () => {
 					lowerThirdInFrame: 30,
 					lowerThirdOutFrame: 120,
 				}}
-				// Reads the real clip's length from the file in public/
-				// instead of you having to measure it by hand each time.
+				// Reads the real clip's length + orientation from the file in
+				// public/ instead of you having to measure/guess by hand.
 				calculateMetadata={async ({props}) => {
-					const {durationInSeconds} = await getVideoMetadata(
+					const {durationInSeconds, width, height} = await getVideoMetadata(
 						staticFile(props.videoFileName),
 					);
 					return {
 						durationInFrames: Math.floor(durationInSeconds * 30),
+						width,
+						height,
+					};
+				}}
+			/>
+			<Composition
+				id="FootageCaptions"
+				component={FootageCaptions}
+				fps={30}
+				width={1080}
+				height={1920}
+				schema={footageCaptionsSchema}
+				defaultProps={{
+					videoFileName: 'video 4.mp4',
+					captionsFileName: 'video 4-captions.json',
+					accentColor: '#39E508',
+				}}
+				calculateMetadata={async ({props}) => {
+					const {durationInSeconds, width, height} = await getVideoMetadata(
+						staticFile(props.videoFileName),
+					);
+					return {
+						durationInFrames: Math.floor(durationInSeconds * 30),
+						width,
+						height,
 					};
 				}}
 			/>

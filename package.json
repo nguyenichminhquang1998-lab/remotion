@@ -11,12 +11,16 @@
     "render:batch": "node scripts/batch-render.mjs",
     "render:real-estate-location": "remotion render src/index.ts RealEstateLocation out/real-estate-location.mp4 --gl=angle --concurrency=1",
     "render:footage-lower-third": "remotion render src/index.ts FootageLowerThird out/footage-lower-third.mp4",
+    "transcribe": "node scripts/transcribe.mjs",
+    "render:footage-captions": "remotion render src/index.ts FootageCaptions out/footage-captions.mp4",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.520",
+    "@remotion/captions": "4.0.520",
     "@remotion/cli": "4.0.520",
     "@remotion/google-fonts": "4.0.520",
+    "@remotion/install-whisper-cpp": "4.0.520",
     "@remotion/media-utils": "4.0.520",
     "@remotion/renderer": "4.0.520",
     "@turf/turf": "^7.4.0",

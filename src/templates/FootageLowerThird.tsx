@@ -10,15 +10,6 @@ import {
 	useVideoConfig,
 } from 'remotion';
 
-// Serif font to match the artist-credit style (bold name + italic role),
-// e.g. the "Composer by Shatnuss" style seen in music-video end credits.
-// Loaded from Google Fonts at render time — needs internet (works fine on
-// a normal PC/office network; blocked in this cloud sandbox).
-const {fontFamily} = loadFont(undefined, {
-	weights: ['400', '700'],
-	subsets: ['vietnamese', 'latin'],
-});
-
 export const footageLowerThirdSchema = z.object({
 	videoFileName: z.string(),
 	name: z.string(),
@@ -48,6 +39,16 @@ export const FootageLowerThird: React.FC<Props> = ({
 }) => {
 	const frame = useCurrentFrame();
 	const {fps} = useVideoConfig();
+
+	// Loaded inside the component (not at module scope) so this network
+	// fetch only happens when THIS composition is actually rendered —
+	// otherwise, because Root.tsx imports every template's module, every
+	// render of any composition in the project would also try to load
+	// this font.
+	const {fontFamily} = loadFont(undefined, {
+		weights: ['400', '700'],
+		subsets: ['vietnamese', 'latin'],
+	});
 
 	const enter = spring({
 		frame: frame - lowerThirdInFrame,

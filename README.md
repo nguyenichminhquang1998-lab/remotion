@@ -12,6 +12,7 @@ Bộ template video tự động hoá dùng Remotion (React video framework). M�
 | `BeFastPromo` | `src/templates/BeFastPromo.tsx` | Promo sản phẩm dọc 9:16, dùng khi làm việc trực tiếp với 1 nhãn hàng cụ thể |
 | `RealEstateLocation` | `src/templates/RealEstateLocation.tsx` | Bản đồ zoom vào 1 địa điểm + marker + tên, cho video bất động sản/event |
 | `FootageLowerThird` | `src/templates/FootageLowerThird.tsx` | Ghép lower-third lên trên **footage thật đã quay** (không phải nền đồ hoạ thuần) |
+| `FootageCaptions` | `src/templates/FootageCaptions.tsx` | Phụ đề động kiểu TikTok (highlight từng từ), tự nhận diện giọng nói tiếng Việt |
 
 ## Cài đặt trên PC văn phòng (làm 1 lần)
 
@@ -97,6 +98,26 @@ Khác với các template trên (đồ hoạ thuần), template này chèn 1 cli
    ```
    npm run render:footage-lower-third
    ```
+
+## `FootageCaptions` — phụ đề động tự nhận diện giọng nói
+
+Tự động nghe clip, tách lời thoại thành phụ đề động kiểu TikTok/Reels (từng từ sáng lên đúng lúc nói) — không cần gõ tay phụ đề.
+
+**Cách dùng:**
+
+1. Copy clip có giọng nói vào `public/` (giống `FootageLowerThird` — file MP4 H.264).
+2. Chạy lệnh nhận diện giọng nói (lần đầu sẽ tự tải Whisper.cpp + model, khoảng 1-1.5GB, chỉ tải 1 lần):
+   ```
+   npm run transcribe -- "video 4.mp4"
+   ```
+   Lệnh này tạo ra file `public/video 4-captions.json`. Mặc định nhận diện tiếng Việt — nếu clip nói tiếng Anh, thêm `-- --lang=en`.
+3. Sửa `defaultProps` của composition `FootageCaptions` trong `src/Root.tsx`: `videoFileName` và `captionsFileName` khớp với bước trên, `accentColor` là màu highlight từ đang nói.
+4. Xem trước (`npm run dev`) hoặc xuất file:
+   ```
+   npm run render:footage-captions
+   ```
+
+Đây là bước tự động, không hoàn hảo 100% — vẫn nên xem lại phụ đề trong `public/*-captions.json` (mở bằng Notepad) nếu có tên riêng/thuật ngữ bị nhận sai, sửa trực tiếp trong file JSON đó (mỗi dòng là 1 từ, sửa `text` là đủ).
 
 ## Khi cần template mới
 
