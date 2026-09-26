@@ -178,8 +178,8 @@ export const Root: React.FC = () => {
 				height={1920}
 				schema={footageCaptionsSchema}
 				defaultProps={{
-					videoFileName: 'video 4.mp4',
-					captionsFileName: 'video 4-captions.json',
+					videoFileName: 'test giọng.mp4',
+					captionsFileName: 'test giọng-captions.json',
 					accentColor: '#39E508',
 				}}
 				calculateMetadata={async ({props}) => {
