@@ -3,6 +3,10 @@ import {IntroOutro, introOutroSchema} from './templates/IntroOutro';
 import {LowerThird, lowerThirdSchema} from './templates/LowerThird';
 import {CaseStudy, caseStudySchema} from './templates/CaseStudy';
 import {BeFastPromo, beFastPromoSchema} from './templates/BeFastPromo';
+import {
+	RealEstateLocation,
+	realEstateLocationSchema,
+} from './templates/RealEstateLocation';
 
 export const Root: React.FC = () => {
 	return (
@@ -96,6 +100,22 @@ export const Root: React.FC = () => {
 						{label: 'Folic Acid', value: 88, suffix: '%'},
 						{label: 'Calcium', value: 49, suffix: '%'},
 					],
+				}}
+			/>
+			<Composition
+				id="RealEstateLocation"
+				component={RealEstateLocation}
+				durationInFrames={168}
+				fps={30}
+				width={1080}
+				height={1920}
+				schema={realEstateLocationSchema}
+				defaultProps={{
+					longitude: 106.6881,
+					latitude: 20.8449,
+					locationName: 'Trung tâm Hải Phòng',
+					subtitle: 'Quận Hồng Bàng',
+					accentColor: '#d4af37',
 				}}
 			/>
 		</>

@@ -9,6 +9,8 @@ Bộ template video tự động hoá dùng Remotion (React video framework). M�
 | `IntroOutro` | `src/templates/IntroOutro.tsx` | Intro/outro cinematic có tên khách hàng + tagline |
 | `LowerThird` | `src/templates/LowerThird.tsx` | Thanh tên/chức danh chạy dưới cho phỏng vấn, testimonial |
 | `CaseStudy` | `src/templates/CaseStudy.tsx` | Animation số liệu (lượt xem, % tăng trưởng...) cho báo cáo/case study gửi khách |
+| `BeFastPromo` | `src/templates/BeFastPromo.tsx` | Promo sản phẩm dọc 9:16, dùng khi làm việc trực tiếp với 1 nhãn hàng cụ thể |
+| `RealEstateLocation` | `src/templates/RealEstateLocation.tsx` | Bản đồ zoom vào 1 địa điểm + marker + tên, cho video bất động sản/event |
 
 ## Cài đặt trên PC văn phòng (làm 1 lần)
 
@@ -53,6 +55,18 @@ npm run render:batch
 ```
 
 Mỗi dòng trong file JSON là 1 video, ra file riêng trong `out/batch/`. Nhờ Claude Code sửa file JSON này theo danh sách khách hàng thật của bạn — không cần đụng vào code render.
+
+## `RealEstateLocation` — chưa render được trong phiên cloud này
+
+Template này dùng skill chính thức `remotion-maps` (MapLibre) — tải bản đồ trực tuyến từ `demotiles.maplibre.org` lúc render. Container cloud dùng để dựng repo này **chặn hẳn domain đó** (chính sách mạng tổ chức, xác nhận bằng `curl` trực tiếp cũng bị từ chối) — không phải lỗi code. Code đã bundle/biên dịch thành công, chỉ bước tải bản đồ là thất bại.
+
+**Trên PC văn phòng có internet bình thường, lệnh sau sẽ chạy được:**
+
+```
+npm run render:real-estate-location
+```
+
+Đổi toạ độ/tên địa điểm trong `defaultProps` của composition `RealEstateLocation` tại `src/Root.tsx`, hoặc nhờ Claude Code sửa hộ theo địa chỉ thật của job.
 
 ## Khi cần template mới
 
