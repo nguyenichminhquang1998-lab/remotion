@@ -54,7 +54,12 @@ const whisperDir = process.env.WHISPER_CPP_DIR
 	? path.resolve(process.env.WHISPER_CPP_DIR)
 	: path.join(projectRoot, 'whisper.cpp');
 const tmpDir = path.join(projectRoot, '.tmp-transcribe');
-const wavPath = path.join(tmpDir, `${baseName}.wav`);
+// ASCII-only filename on purpose: whisper.cpp's main.exe is a native binary,
+// and on Windows its argv doesn't reliably receive non-ASCII characters
+// (e.g. Vietnamese diacritics get mangled to "?"), causing "input file not
+// found" even though the file exists. Doesn't matter what this is named —
+// it's a throwaway intermediate file, deleted at the end.
+const wavPath = path.join(tmpDir, 'transcribe-input.wav');
 const outputJsonPath = path.join(projectRoot, 'public', `${baseName}-captions.json`);
 
 mkdirSync(tmpDir, {recursive: true});
