@@ -60,6 +60,8 @@ Mỗi dòng trong file JSON là 1 video, ra file riêng trong `out/batch/`. Nh�
 
 Template này dùng skill chính thức `remotion-maps` (MapLibre) — tải bản đồ trực tuyến từ `demotiles.maplibre.org` lúc render. Container cloud dùng để dựng repo này **chặn hẳn domain đó** (chính sách mạng tổ chức, xác nhận bằng `curl` trực tiếp cũng bị từ chối) — không phải lỗi code. Code đã bundle/biên dịch thành công, chỉ bước tải bản đồ là thất bại.
 
+**Đã sửa 1 bug (26/09):** trên PC có mạng thật, render từng bị timeout ở giữa video (`delayRender()` treo 3 lần chồng nhau) do component tạo lại bản đồ MapLibre mới ở mỗi frame thay vì 1 lần duy nhất. Đã sửa — nếu vẫn gặp lỗi tương tự, `git pull` để lấy bản mới nhất rồi render lại.
+
 **Trên PC văn phòng có internet bình thường, lệnh sau sẽ chạy được:**
 
 ```

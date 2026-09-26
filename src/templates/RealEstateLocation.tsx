@@ -2,7 +2,7 @@ import * as turf from '@turf/turf';
 import * as maplibregl from 'maplibre-gl';
 import type {GeoJSONSource, Map as MaplibreMap} from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {z} from 'zod';
 import {
 	AbsoluteFill,
@@ -37,12 +37,21 @@ export const RealEstateLocation: React.FC<Props> = ({
 	const [map, setMap] = useState<MaplibreMap | null>(null);
 	const [loadingHandle] = useState(() => delayRender('Loading MapLibre map'));
 
-	const target: [number, number] = [longitude, latitude];
+	// Stable reference: Remotion re-renders this component on every frame
+	// (useCurrentFrame), so a plain array literal here would be a new
+	// reference each frame and force the map-creation effect below to
+	// re-run every frame instead of once on mount.
+	const target = useMemo<[number, number]>(
+		() => [longitude, latitude],
+		[longitude, latitude],
+	);
 
 	useEffect(() => {
 		if (!containerRef.current) {
 			return;
 		}
+
+		let cancelled = false;
 
 		maplibregl.setWorkerUrl(
 			URL.createObjectURL(
@@ -110,10 +119,18 @@ export const RealEstateLocation: React.FC<Props> = ({
 
 			mapInstance.jumpTo({center: target, zoom: 11});
 			mapInstance.once('idle', () => {
+				if (cancelled) {
+					return;
+				}
 				setMap(mapInstance);
 				continueRender(loadingHandle);
 			});
 		});
+
+		return () => {
+			cancelled = true;
+			mapInstance.remove();
+		};
 	}, [continueRender, loadingHandle, locationName, accentColor, target]);
 
 	useEffect(() => {
@@ -121,6 +138,7 @@ export const RealEstateLocation: React.FC<Props> = ({
 			return;
 		}
 
+		let settled = false;
 		const handle = delayRender('Rendering MapLibre frame');
 		const timelineProgress = interpolate(frame, [0, durationInFrames - 1], [0, 1], {
 			extrapolateLeft: 'clamp',
@@ -143,8 +161,23 @@ export const RealEstateLocation: React.FC<Props> = ({
 		map.setPaintProperty('location-marker-dot', 'circle-stroke-opacity', markerOpacity);
 		map.setPaintProperty('location-marker-label', 'text-opacity', markerOpacity);
 
-		map.once('idle', () => continueRender(handle));
+		map.once('idle', () => {
+			if (settled) {
+				return;
+			}
+			settled = true;
+			continueRender(handle);
+		});
 		map.triggerRepaint();
+
+		return () => {
+			// Guard against a stale handle if this effect is torn down
+			// (e.g. component unmount) before MapLibre reaches idle.
+			if (!settled) {
+				settled = true;
+				continueRender(handle);
+			}
+		};
 	}, [continueRender, delayRender, durationInFrames, frame, map, target]);
 
 	const captionOpacity = interpolate(
