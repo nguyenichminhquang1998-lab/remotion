@@ -148,7 +148,7 @@ export const Root: React.FC = () => {
 				height={1080}
 				schema={footageLowerThirdSchema}
 				defaultProps={{
-					videoFileName: 'video 4.mov',
+					videoFileName: 'video 4.mp4',
 					name: 'Nguyễn Thanh Tùng',
 					stageName: 'Shartnuss',
 					subtitle: 'Nghệ sĩ',
