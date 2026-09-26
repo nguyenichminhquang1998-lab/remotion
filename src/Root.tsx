@@ -7,6 +7,7 @@ import {
 	RealEstateLocation,
 	realEstateLocationSchema,
 } from './templates/RealEstateLocation';
+import {RealEstateLocationPreview} from './templates/RealEstateLocationPreview';
 
 export const Root: React.FC = () => {
 	return (
@@ -105,6 +106,22 @@ export const Root: React.FC = () => {
 			<Composition
 				id="RealEstateLocation"
 				component={RealEstateLocation}
+				durationInFrames={168}
+				fps={30}
+				width={1080}
+				height={1920}
+				schema={realEstateLocationSchema}
+				defaultProps={{
+					longitude: 106.6881,
+					latitude: 20.8449,
+					locationName: 'Trung tâm Hải Phòng',
+					subtitle: 'Quận Hồng Bàng',
+					accentColor: '#d4af37',
+				}}
+			/>
+			<Composition
+				id="RealEstateLocationPreview"
+				component={RealEstateLocationPreview}
 				durationInFrames={168}
 				fps={30}
 				width={1080}
