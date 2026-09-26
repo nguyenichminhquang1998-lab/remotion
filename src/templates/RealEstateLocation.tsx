@@ -61,7 +61,8 @@ export const RealEstateLocation: React.FC<Props> = ({
 			center: target,
 			zoom: 11,
 			interactive: false,
-			attributionControl: false,
+			// Required by the demo style's terms: keep provider attribution visible.
+			attributionControl: {compact: true},
 			fadeDuration: 0,
 			canvasContextAttributes: {
 				preserveDrawingBuffer: true,
