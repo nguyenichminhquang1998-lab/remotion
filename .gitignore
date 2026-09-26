@@ -4,3 +4,8 @@ renders
 .DS_Store
 .env
 .env.local
+
+# Footage that goes into public/ for FootageLowerThird etc. is real client
+# media, not code — keep it out of git. .gitkeep keeps the folder itself.
+public/*
+!public/.gitkeep

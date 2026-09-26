@@ -1,4 +1,5 @@
-import {Composition} from 'remotion';
+import {Composition, staticFile} from 'remotion';
+import {getVideoMetadata} from '@remotion/media-utils';
 import {IntroOutro, introOutroSchema} from './templates/IntroOutro';
 import {LowerThird, lowerThirdSchema} from './templates/LowerThird';
 import {CaseStudy, caseStudySchema} from './templates/CaseStudy';
@@ -8,6 +9,10 @@ import {
 	realEstateLocationSchema,
 } from './templates/RealEstateLocation';
 import {RealEstateLocationPreview} from './templates/RealEstateLocationPreview';
+import {
+	FootageLowerThird,
+	footageLowerThirdSchema,
+} from './templates/FootageLowerThird';
 
 export const Root: React.FC = () => {
 	return (
@@ -133,6 +138,32 @@ export const Root: React.FC = () => {
 					locationName: 'Trung tâm Hải Phòng',
 					subtitle: 'Quận Hồng Bàng',
 					accentColor: '#d4af37',
+				}}
+			/>
+			<Composition
+				id="FootageLowerThird"
+				component={FootageLowerThird}
+				fps={30}
+				width={1920}
+				height={1080}
+				schema={footageLowerThirdSchema}
+				defaultProps={{
+					videoFileName: 'sample-footage.mp4',
+					name: 'Nguyen Van A',
+					subtitle: 'Chủ đầu tư',
+					accentColor: '#d4af37',
+					lowerThirdInFrame: 30,
+					lowerThirdOutFrame: 120,
+				}}
+				// Reads the real clip's length from the file in public/
+				// instead of you having to measure it by hand each time.
+				calculateMetadata={async ({props}) => {
+					const {durationInSeconds} = await getVideoMetadata(
+						staticFile(props.videoFileName),
+					);
+					return {
+						durationInFrames: Math.floor(durationInSeconds * 30),
+					};
 				}}
 			/>
 		</>

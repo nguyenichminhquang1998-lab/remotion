@@ -11,6 +11,7 @@ Bộ template video tự động hoá dùng Remotion (React video framework). M�
 | `CaseStudy` | `src/templates/CaseStudy.tsx` | Animation số liệu (lượt xem, % tăng trưởng...) cho báo cáo/case study gửi khách |
 | `BeFastPromo` | `src/templates/BeFastPromo.tsx` | Promo sản phẩm dọc 9:16, dùng khi làm việc trực tiếp với 1 nhãn hàng cụ thể |
 | `RealEstateLocation` | `src/templates/RealEstateLocation.tsx` | Bản đồ zoom vào 1 địa điểm + marker + tên, cho video bất động sản/event |
+| `FootageLowerThird` | `src/templates/FootageLowerThird.tsx` | Ghép lower-third lên trên **footage thật đã quay** (không phải nền đồ hoạ thuần) |
 
 ## Cài đặt trên PC văn phòng (làm 1 lần)
 
@@ -81,6 +82,21 @@ npm run render:real-estate-location
 ```
 
 Đổi toạ độ/tên địa điểm trong `defaultProps` của composition `RealEstateLocation` tại `src/Root.tsx`, hoặc nhờ Claude Code sửa hộ theo địa chỉ thật của job.
+
+## `FootageLowerThird` — ghép lower-third lên footage thật
+
+Khác với các template trên (đồ hoạ thuần), template này chèn 1 clip video thật của bạn làm nền rồi overlay lower-third lên trên — đúng việc bạn làm thật khi edit phỏng vấn/testimonial.
+
+**Cách dùng:**
+
+1. Copy file video (đã xuất sẵn từ Premiere/Resolve, khuyên dùng .mp4 H264) vào thư mục `public/` ở gốc project. Ví dụ: `public/phong-van-khach.mp4`.
+   - Thư mục `public/` không đồng bộ lên GitHub (file video thật quá nặng, không hợp để lưu trên git) — mỗi máy tự có bộ footage riêng.
+2. Sửa `defaultProps` của composition `FootageLowerThird` trong `src/Root.tsx`: đổi `videoFileName` thành đúng tên file, `name`/`subtitle`/`accentColor` theo người trong clip, `lowerThirdInFrame`/`lowerThirdOutFrame` là frame bắt đầu/kết thúc hiển thị (30 frame = 1 giây).
+3. Xem trước trong Studio (`npm run dev`) — **độ dài video tự động khớp với clip thật**, không cần đo tay.
+4. Xuất file:
+   ```
+   npm run render:footage-lower-third
+   ```
 
 ## Khi cần template mới
 
