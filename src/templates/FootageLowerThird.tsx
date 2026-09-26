@@ -1,3 +1,4 @@
+import {loadFont} from '@remotion/google-fonts/EBGaramond';
 import {z} from 'zod';
 import {
 	AbsoluteFill,
@@ -9,9 +10,20 @@ import {
 	useVideoConfig,
 } from 'remotion';
 
+// Serif font to match the artist-credit style (bold name + italic role),
+// e.g. the "Composer by Shatnuss" style seen in music-video end credits.
+// Loaded from Google Fonts at render time — needs internet (works fine on
+// a normal PC/office network; blocked in this cloud sandbox).
+const {fontFamily} = loadFont(undefined, {
+	weights: ['400', '700'],
+	subsets: ['vietnamese', 'latin'],
+});
+
 export const footageLowerThirdSchema = z.object({
 	videoFileName: z.string(),
 	name: z.string(),
+	// Optional second line under `name`, e.g. a stage/artist name.
+	stageName: z.string().optional(),
 	subtitle: z.string(),
 	accentColor: z.string(),
 	// Frame range (relative to the whole clip) the lower-third is shown for.
@@ -28,6 +40,7 @@ type Props = z.infer<typeof footageLowerThirdSchema>;
 export const FootageLowerThird: React.FC<Props> = ({
 	videoFileName,
 	name,
+	stageName,
 	subtitle,
 	accentColor,
 	lowerThirdInFrame,
@@ -66,26 +79,42 @@ export const FootageLowerThird: React.FC<Props> = ({
 					}}
 				>
 					<div style={{display: 'flex', alignItems: 'center', gap: 14}}>
-						<div style={{width: 6, height: 42, backgroundColor: accentColor}} />
-						<div
-							style={{
-								color: 'white',
-								fontSize: 36,
-								fontWeight: 700,
-								fontFamily: 'Helvetica, Arial, sans-serif',
-								textShadow: '0 2px 10px rgba(0,0,0,0.6)',
-							}}
-						>
-							{name}
+						<div style={{width: 6, height: stageName ? 66 : 42, backgroundColor: accentColor}} />
+						<div style={{display: 'flex', flexDirection: 'column'}}>
+							<div
+								style={{
+									color: 'white',
+									fontSize: 36,
+									fontWeight: 700,
+									fontFamily,
+									textShadow: '0 2px 10px rgba(0,0,0,0.6)',
+								}}
+							>
+								{name}
+							</div>
+							{stageName ? (
+								<div
+									style={{
+										color: 'white',
+										fontSize: 28,
+										fontStyle: 'italic',
+										fontFamily,
+										textShadow: '0 2px 10px rgba(0,0,0,0.6)',
+									}}
+								>
+									{stageName}
+								</div>
+							) : null}
 						</div>
 					</div>
 					<div
 						style={{
 							color: accentColor,
 							fontSize: 20,
+							fontStyle: 'italic',
 							marginLeft: 20,
 							marginTop: 4,
-							fontFamily: 'Helvetica, Arial, sans-serif',
+							fontFamily,
 							textShadow: '0 2px 10px rgba(0,0,0,0.6)',
 						}}
 					>

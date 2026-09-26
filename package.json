@@ -16,6 +16,7 @@
   "dependencies": {
     "@remotion/bundler": "4.0.520",
     "@remotion/cli": "4.0.520",
+    "@remotion/google-fonts": "4.0.520",
     "@remotion/media-utils": "4.0.520",
     "@remotion/renderer": "4.0.520",
     "@turf/turf": "^7.4.0",

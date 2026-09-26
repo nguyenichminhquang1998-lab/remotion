@@ -148,10 +148,11 @@ export const Root: React.FC = () => {
 				height={1080}
 				schema={footageLowerThirdSchema}
 				defaultProps={{
-					videoFileName: 'sample-footage.mp4',
-					name: 'Nguyen Van A',
-					subtitle: 'Chủ đầu tư',
-					accentColor: '#d4af37',
+					videoFileName: 'video 4.mov',
+					name: 'Nguyễn Thanh Tùng',
+					stageName: 'Shartnuss',
+					subtitle: 'Nghệ sĩ',
+					accentColor: '#3d5a73',
 					lowerThirdInFrame: 30,
 					lowerThirdOutFrame: 120,
 				}}
