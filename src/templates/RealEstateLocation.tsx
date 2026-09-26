@@ -64,9 +64,21 @@ export const RealEstateLocation: React.FC<Props> = ({
 			),
 		);
 
+		const maptilerKey = process.env.REMOTION_PUBLIC_MAPTILER_KEY;
+		const style = maptilerKey
+			? `https://api.maptiler.com/maps/streets-v2/style.json?key=${maptilerKey}`
+			: 'https://demotiles.maplibre.org/style.json';
+
+		if (!maptilerKey) {
+			// eslint-disable-next-line no-console
+			console.warn(
+				'REMOTION_PUBLIC_MAPTILER_KEY chua duoc set trong .env — dang dung ban do demo (khong co chi tiet duong pho), khong hop de giao khach.',
+			);
+		}
+
 		const mapInstance = new maplibregl.Map({
 			container: containerRef.current,
-			style: 'https://demotiles.maplibre.org/style.json',
+			style,
 			center: target,
 			zoom: 11,
 			interactive: false,

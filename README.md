@@ -56,11 +56,23 @@ npm run render:batch
 
 Mỗi dòng trong file JSON là 1 video, ra file riêng trong `out/batch/`. Nhờ Claude Code sửa file JSON này theo danh sách khách hàng thật của bạn — không cần đụng vào code render.
 
-## `RealEstateLocation` — chưa render được trong phiên cloud này
+## `RealEstateLocation` — cần API key MapTiler trước khi giao khách
 
-Template này dùng skill chính thức `remotion-maps` (MapLibre) — tải bản đồ trực tuyến từ `demotiles.maplibre.org` lúc render. Container cloud dùng để dựng repo này **chặn hẳn domain đó** (chính sách mạng tổ chức, xác nhận bằng `curl` trực tiếp cũng bị từ chối) — không phải lỗi code. Code đã bundle/biên dịch thành công, chỉ bước tải bản đồ là thất bại.
+Template này dùng skill chính thức `remotion-maps` (MapLibre). Mặc định (chưa cấu hình key) nó dùng bản đồ demo `demotiles.maplibre.org` — **không có chi tiết đường/phố, chỉ để test chuyển động, không dùng cho khách thật**.
 
-**Đã sửa 1 bug (26/09):** trên PC có mạng thật, render từng bị timeout ở giữa video (`delayRender()` treo 3 lần chồng nhau) do component tạo lại bản đồ MapLibre mới ở mỗi frame thay vì 1 lần duy nhất. Đã sửa — nếu vẫn gặp lỗi tương tự, `git pull` để lấy bản mới nhất rồi render lại.
+**Đã sửa 1 bug (26/09):** trên PC có mạng thật, render từng bị timeout ở giữa video (`delayRender()` treo 3 lần chồng nhau) do component tạo lại bản đồ MapLibre mới ở mỗi frame thay vì 1 lần duy nhất. Đã sửa.
+
+### Cấu hình bản đồ thật (MapTiler) — làm 1 lần
+
+1. Đăng ký tài khoản free tại https://cloud.maptiler.com/ → lấy API key ở mục "API keys".
+2. Copy file `.env.example` thành `.env` (file `.env` không bị commit lên GitHub, key giữ riêng trên máy).
+3. Dán key vào `.env`:
+   ```
+   REMOTION_PUBLIC_MAPTILER_KEY=key_that_cua_ban
+   ```
+4. Chạy lại `npm run dev` hoặc `npm run render:real-estate-location` — nếu key đúng, bản đồ sẽ có chi tiết đường phố thật.
+
+Vì sao MapTiler chứ không phải Mapbox: code đang dùng thư viện mở `maplibre-gl`, MapTiler tương thích thẳng (chỉ đổi URL style + key). Mapbox có điều khoản dịch vụ giới hạn dùng tile của họ với SDK không phải chính chủ — dùng MapLibre để hiển thị tile Mapbox có rủi ro vi phạm ToS, không hợp cho sản phẩm giao khách.
 
 **Trên PC văn phòng có internet bình thường, lệnh sau sẽ chạy được:**
 
