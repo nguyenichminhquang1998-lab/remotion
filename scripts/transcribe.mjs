@@ -45,7 +45,14 @@ if (!existsSync(videoPath)) {
 }
 
 const baseName = path.parse(inputArg).name;
-const whisperDir = path.join(projectRoot, 'whisper.cpp');
+// Windows' Expand-Archive (used internally by @remotion/install-whisper-cpp)
+// breaks when any part of the path contains a space — including a Windows
+// username with a space (e.g. "C:\Users\My PC\..."), which is outside this
+// project's control. Allow overriding the install location to sidestep it:
+//   WHISPER_CPP_DIR="C:/whisper-cpp" npm run transcribe -- "video.mp4"
+const whisperDir = process.env.WHISPER_CPP_DIR
+	? path.resolve(process.env.WHISPER_CPP_DIR)
+	: path.join(projectRoot, 'whisper.cpp');
 const tmpDir = path.join(projectRoot, '.tmp-transcribe');
 const wavPath = path.join(tmpDir, `${baseName}.wav`);
 const outputJsonPath = path.join(projectRoot, 'public', `${baseName}-captions.json`);

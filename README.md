@@ -117,6 +117,11 @@ Tự động nghe clip, tách lời thoại thành phụ đề động kiểu Ti
    npm run render:footage-captions
    ```
 
+**Nếu tên tài khoản Windows có khoảng trắng (ví dụ `C:\Users\My PC\...`):** bước cài Whisper.cpp có thể báo lỗi `Expand-Archive` (lỗi của công cụ Windows, không phải lỗi project). Khắc phục bằng cách chỉ định 1 thư mục cài đặt khác không có khoảng trắng, ví dụ:
+```
+WHISPER_CPP_DIR="C:/whisper-cpp" npm run transcribe -- "video 4.mp4"
+```
+
 Đây là bước tự động, không hoàn hảo 100% — vẫn nên xem lại phụ đề trong `public/*-captions.json` (mở bằng Notepad) nếu có tên riêng/thuật ngữ bị nhận sai, sửa trực tiếp trong file JSON đó (mỗi dòng là 1 từ, sửa `text` là đủ).
 
 ## Khi cần template mới
