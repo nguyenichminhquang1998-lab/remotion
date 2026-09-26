@@ -58,7 +58,11 @@ const wavPath = path.join(tmpDir, `${baseName}.wav`);
 const outputJsonPath = path.join(projectRoot, 'public', `${baseName}-captions.json`);
 
 mkdirSync(tmpDir, {recursive: true});
-mkdirSync(whisperDir, {recursive: true});
+// Don't pre-create whisperDir itself: installWhisperCpp() treats an
+// already-existing `to` folder as "a previous install is here" and refuses
+// to proceed if it's missing the binary. Expand-Archive creates the
+// destination folder on its own, so only its parent needs to exist.
+mkdirSync(path.dirname(whisperDir), {recursive: true});
 
 console.log('1/4 — Cai Whisper.cpp (lan dau se tai ve, cac lan sau dung lai)...');
 // @remotion/install-whisper-cpp downloads the zip to `path.join(process.cwd(),
@@ -66,10 +70,10 @@ console.log('1/4 — Cai Whisper.cpp (lan dau se tai ve, cac lan sau dung lai)..
 // then unzips it with Windows' Expand-Archive. If process.cwd() has a space
 // in it anywhere (e.g. a Windows username like "My PC"), that download path
 // alone breaks Expand-Archive even when `to` itself is space-free. Work
-// around it by temporarily cd-ing into whisperDir (already guaranteed
-// space-free when WHISPER_CPP_DIR is set) just for this one call.
+// around it by temporarily cd-ing into whisperDir's parent (already
+// guaranteed space-free when WHISPER_CPP_DIR is set) just for this one call.
 const originalCwd = process.cwd();
-process.chdir(whisperDir);
+process.chdir(path.dirname(whisperDir));
 try {
 	await installWhisperCpp({to: whisperDir, version: '1.5.5'});
 } finally {
