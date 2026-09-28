@@ -13,14 +13,14 @@ TOTAL = SOURCE_DUR + TAIL_FREEZE
 # each line ends with a small margin before the next line's start_sec
 VO = [
     ("01-hook.mp3", 0.25, 1.01),
-    ("02-intro.mp3", 4.3, 1.0),
+    ("02-intro.mp3", 4.3, 1.01),
     ("03-one-contact.mp3", 8.2, 1.0),
-    ("04-pullupinmymind.mp3", 14.45, 1.05),
+    ("04-pullupinmymind.mp3", 14.45, 1.0),
     ("05-orpc.mp3", 22.0, 1.08),
     ("06-reel.mp3", 25.3, 1.0),
-    ("07-process.mp3", 30.2, 1.02),
+    ("07-process.mp3", 30.2, 1.0),
     ("08-clients.mp3", 36.4, 1.0),
-    ("09-cta.mp3", 40.3, 1.03),
+    ("09-cta.mp3", 40.3, 1.0),
 ]
 # (file, trim_start, trim_dur, at_sec, gain)
 SFX = [
