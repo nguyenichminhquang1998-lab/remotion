@@ -1,0 +1,228 @@
+<template>
+  <style>
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/newsreader-vietnamese-400-normal.woff2") format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/newsreader-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/newsreader-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:600;font-display:block;src:url("assets/fonts/newsreader-vietnamese-600-normal.woff2") format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:600;font-display:block;src:url("assets/fonts/newsreader-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:600;font-display:block;src:url("assets/fonts/newsreader-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:700;font-display:block;src:url("assets/fonts/newsreader-vietnamese-700-normal.woff2") format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:700;font-display:block;src:url("assets/fonts/newsreader-latin-ext-700-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:700;font-display:block;src:url("assets/fonts/newsreader-latin-700-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:800;font-display:block;src:url("assets/fonts/newsreader-vietnamese-800-normal.woff2") format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:800;font-display:block;src:url("assets/fonts/newsreader-latin-ext-800-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:800;font-display:block;src:url("assets/fonts/newsreader-latin-800-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/ibm-plex-mono-vietnamese-400-normal.woff2") format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/ibm-plex-mono-latin-ext-400-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:block;src:url("assets/fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:block;src:url("assets/fonts/ibm-plex-mono-vietnamese-500-normal.woff2") format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:block;src:url("assets/fonts/ibm-plex-mono-latin-ext-500-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:block;src:url("assets/fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:block;src:url("assets/fonts/ibm-plex-mono-vietnamese-600-normal.woff2") format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:block;src:url("assets/fonts/ibm-plex-mono-latin-ext-600-normal.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:block;src:url("assets/fonts/ibm-plex-mono-latin-600-normal.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+  </style>
+  <style>
+    #root {
+      position: absolute;
+      inset: 0;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      color: #EDEAE4;
+      font-family: "Newsreader", serif;
+    }
+    #root [data-el="ground"] {
+      position: absolute;
+      inset: 0;
+      background: #0E0D0C;
+    }
+    #root [data-el="stage"] {
+      position: absolute;
+      inset: 0;
+      transform-origin: 30% 40%;
+    }
+    /* top chrome row */
+    #root [data-el="chrome"] {
+      position: absolute;
+      left: 60px;
+      right: 60px;
+      top: 250px;
+      height: 64px;
+      border-bottom: 1px solid #282726;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 500;
+      font-size: 26px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    #root [data-el="rule"] {
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 36px;
+      height: 2px;
+      background: #8A6A3C;
+    }
+    #root [data-el="counter"] {
+      position: absolute;
+      right: 0;
+      top: 0;
+      white-space: nowrap;
+      color: #EDEAE4;
+    }
+    #root [data-el="counter"] span[data-n] { display: inline-block; opacity: 0.28; }
+    #root [data-el="counter"] span[data-sep] { opacity: 0.28; }
+    /* entries — all occupy the same position */
+    #root [data-el="entry"] {
+      position: absolute;
+      left: 60px;
+      right: 60px;
+      top: 560px;
+    }
+    #root [data-el="slate"] {
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 500;
+      font-size: 40px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: #EDEAE4;
+      padding-bottom: 28px;
+      border-bottom: 1px solid #282726;
+    }
+    #root [data-el="slate"] b {
+      font-weight: 600;
+      color: #8A6A3C;
+    }
+    #root [data-el="title-wrap"] {
+      margin-top: 56px;
+      overflow: visible;
+    }
+    #root [data-el="title"] {
+      font-family: "Newsreader", serif;
+      font-weight: 800;
+      font-size: 168px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      text-transform: lowercase;
+      color: #EDEAE4;
+      white-space: nowrap;
+    }
+    #root [data-el="role"] {
+      margin-top: 64px;
+      font-family: "IBM Plex Mono", monospace;
+      font-weight: 500;
+      font-size: 30px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8A6A3C;
+      white-space: nowrap;
+    }
+    /* progress track — three segments, one per page */
+    #root [data-el="track"] {
+      position: absolute;
+      left: 60px;
+      right: 60px;
+      top: 1440px;
+      height: 2px;
+      display: flex;
+      gap: 16px;
+    }
+    #root [data-el="seg"] {
+      position: relative;
+      flex: 1;
+      height: 2px;
+      background: #282726;
+    }
+    #root [data-el="fill"] {
+      position: absolute;
+      inset: 0;
+      background: #8A6A3C;
+      transform-origin: 0 50%;
+    }
+  </style>
+
+  <div id="root" data-composition-id="06-reel" data-width="1080" data-height="1920" data-duration="5.5">
+    <div id="f06-reel-ground" data-el="ground" class="clip" data-start="0" data-duration="5.5" data-track-index="0"></div>
+
+    <div id="f06-reel-stage" data-el="stage">
+      <div data-el="chrome">
+        <div data-el="rule"></div>
+        <div data-el="counter"><span id="f06-reel-n1" data-n>05</span><span data-sep> / </span><span id="f06-reel-n2" data-n>06</span><span data-sep> / </span><span id="f06-reel-n3" data-n>07</span></div>
+      </div>
+
+      <div id="f06-reel-e1" data-el="entry">
+        <div id="f06-reel-s1" data-el="slate"><b>SCN 05</b> / TVC / 2025</div>
+        <div data-el="title-wrap"><div id="f06-reel-t1" data-el="title">thép nhật<br>tiến</div></div>
+        <div id="f06-reel-r1" data-el="role">TVC DOANH NGHIỆP</div>
+      </div>
+
+      <div id="f06-reel-e2" data-el="entry">
+        <div id="f06-reel-s2" data-el="slate"><b>SCN 06</b> / TVC / 2023</div>
+        <div data-el="title-wrap"><div id="f06-reel-t2" data-el="title">thủy sản<br>anh minh</div></div>
+        <div id="f06-reel-r2" data-el="role">TVC DOANH NGHIỆP</div>
+      </div>
+
+      <div id="f06-reel-e3" data-el="entry">
+        <div id="f06-reel-s3" data-el="slate"><b>SCN 07</b> / MV / 2025</div>
+        <div data-el="title-wrap"><div id="f06-reel-t3" data-el="title">còn chờ là<br>còn nhớ</div></div>
+        <div id="f06-reel-r3" data-el="role">ĐỒNG ĐẠO DIỄN · QUAY · DỰNG</div>
+      </div>
+
+      <div data-el="track">
+        <div data-el="seg"><div id="f06-reel-f1" data-el="fill"></div></div>
+        <div data-el="seg"><div id="f06-reel-f2" data-el="fill"></div></div>
+        <div data-el="seg"><div id="f06-reel-f3" data-el="fill"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script>
+    (function () {
+      window.__timelines = window.__timelines || {};
+      var $ = function (id) { return document.getElementById("f06-reel-" + id); };
+      var tl = gsap.timeline({ paused: true });
+      var DUR = 5.0;
+      var CUTS = [0.0, 1.6, 3.2];
+      var ENDS = [1.6, 3.2, 5.0];
+
+      // slow push under the hard cuts (element scale, camera-locked feel)
+      tl.fromTo($("stage"), { scale: 1.0 }, { scale: 1.03, duration: DUR, ease: "none" }, 0);
+
+      // initial states — seek-safe via set at t=0
+      tl.set([$("e2"), $("e3")], { autoAlpha: 0 }, 0);
+      tl.set($("e1"), { autoAlpha: 1 }, 0);
+      tl.set([$("f1"), $("f2"), $("f3")], { scaleX: 0 }, 0);
+
+      for (var i = 0; i < 3; i++) {
+        var k = i + 1;
+        var t = CUTS[i];
+
+        // hard cut: previous page gone, next page on — instant, no fade
+        if (i > 0) {
+          tl.set($("e" + i), { autoAlpha: 0 }, t);
+          tl.set($("e" + k), { autoAlpha: 1 }, t);
+          tl.set($("f" + i), { scaleX: 1 }, t);
+        }
+
+        // page counter steps: active numeral in brass
+        tl.set($("n" + k), { opacity: 1, color: "#8A6A3C" }, t);
+        if (i > 0) tl.set($("n" + i), { opacity: 0.28, color: "#EDEAE4" }, t);
+
+        // page flip: slate snaps in from a small x offset
+        tl.fromTo($("s" + k), { x: 28 }, { x: 0, duration: 0.18, ease: "power3.out" }, t);
+        // title: very short rise (<= 0.25s) so the cut reads as a flip
+        tl.fromTo($("t" + k), { y: 56, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.24, ease: "power3.out" }, t);
+        // role line lands just behind the title
+        tl.fromTo($("r" + k), { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.22, ease: "power2.out" }, t + 0.1);
+
+        // progress segment fills across the page's window
+        tl.fromTo($("f" + k), { scaleX: 0 }, { scaleX: 1, duration: ENDS[i] - t - (i === 2 ? 0.6 : 0), ease: "none" }, t);
+      }
+
+      window.__timelines["06-reel"] = tl;
+    })();
+  </script>
+</template>
