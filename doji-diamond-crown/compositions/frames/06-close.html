@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="assets/fonts/fonts.css" />
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 400; src: url("assets/fonts/space-grotesk-400.woff2") format("woff2"); }
+  @font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 500; src: url("assets/fonts/space-grotesk-500.woff2") format("woff2"); }
+  @font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 600; src: url("assets/fonts/space-grotesk-600.woff2") format("woff2"); }
+  @font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 700; src: url("assets/fonts/space-grotesk-700.woff2") format("woff2"); }
+  @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; src: url("assets/fonts/ibm-plex-mono-500.woff2") format("woff2"); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #0A0E14; }
+  .clip { position: absolute; inset: 0; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="06-close" data-start="0" data-duration="8" data-width="1080" data-height="1920"
+     style="position:relative; width:1080px; height:1920px; overflow:hidden; background:#0A0E14; container-type:size;">
+
+  <div class="clip" data-start="0" data-duration="8" data-track-index="0" style="overflow:hidden;">
+    <div class="f6-kb" style="position:absolute; inset:0; background:url('assets/images/01-aerial-night.jpg') center 42% / cover no-repeat;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(10,14,20,.95) 0%, rgba(10,14,20,.68) 40%, rgba(10,14,20,.25) 66%, rgba(10,14,20,.55) 100%);"></div>
+  </div>
+
+  <div class="clip f6-flash" data-start="0" data-duration="0.5" data-track-index="1" style="background:#35D6FF;"></div>
+
+  <div class="clip f6-line1" data-start="0.6" data-duration="7.4" data-track-index="2" style="inset:auto; left:5.5cqw; top:38%; width:82cqw;">
+    <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:9.6cqw; line-height:.94; letter-spacing:-.04em; color:#F3F5F8; text-transform:lowercase;">diamond crown hai phong.</div>
+  </div>
+
+  <div class="clip" data-start="2.0" data-duration="6.0" data-track-index="3" style="inset:auto; left:5.5cqw; top:52%; width:80cqw;">
+    <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:5.2cqw; line-height:1.15; letter-spacing:-.02em; text-transform:lowercase;">
+      <span class="f6-line2a" style="color:#F3F5F8;">the city's new icon,</span>
+      <span class="f6-line2b" style="color:#35D6FF;">rising now.</span>
+    </div>
+  </div>
+
+  <div class="clip f6-signoff" data-start="4.5" data-duration="3.5" data-track-index="4" style="inset:auto; left:5.5cqw; top:68%;">
+    <div style="font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:1.5cqw; letter-spacing:.14em; text-transform:uppercase; color:rgba(243,245,248,.55);">Dojiland &middot; Hai Phong, Vietnam</div>
+  </div>
+
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+
+  tl.fromTo(".f6-flash", { opacity: 1 }, { opacity: 0, duration: .5, ease: "power1.out" }, 0);
+
+  tl.set(".f6-kb", { scale: 1.10, x: 10, y: 6, transformOrigin: "50% 42%" });
+  tl.to(".f6-kb", { scale: 1.02, x: 0, y: 0, duration: 8, ease: "none" }, 0);
+
+  tl.fromTo(".f6-line1", { opacity: 0, y: 22, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: .55, ease: "expo.out" }, 0.6);
+  tl.fromTo(".f6-line2a", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .4, ease: "expo.out" }, 2.0);
+  tl.fromTo(".f6-line2b", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: .4, ease: "expo.out" }, 3.4);
+  tl.fromTo(".f6-signoff", { opacity: 0 }, { opacity: 1, duration: .6, ease: "power1.out" }, 4.5);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines["06-close"] = tl;
+  tl.seek(0);
+</script>
+</body>
+</html>

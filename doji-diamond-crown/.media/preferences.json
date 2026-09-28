@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "preferences": {
+    "destination": {
+      "value": "tiktok-reels-shorts",
+      "confirmed_in": [
+        "doji-diamond-crown"
+      ],
+      "updated_at": "2026-09-28T16:50:13.578Z"
+    },
+    "aspect": {
+      "value": "1080x1920",
+      "confirmed_in": [
+        "doji-diamond-crown"
+      ],
+      "updated_at": "2026-09-28T16:50:13.634Z"
+    },
+    "language": {
+      "value": "en",
+      "confirmed_in": [
+        "doji-diamond-crown"
+      ],
+      "updated_at": "2026-09-28T16:50:13.689Z"
+    },
+    "flow": {
+      "value": "automation",
+      "confirmed_in": [
+        "doji-diamond-crown"
+      ],
+      "updated_at": "2026-09-28T16:50:13.740Z"
+    },
+    "storyboard": {
+      "value": "no",
+      "confirmed_in": [
+        "doji-diamond-crown"
+      ],
+      "updated_at": "2026-09-28T16:50:13.790Z"
+    }
+  },
+  "sightings": {}
+}
