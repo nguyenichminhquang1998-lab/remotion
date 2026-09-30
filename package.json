@@ -1,0 +1,18 @@
+{
+  "name": "saas-product-film",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render src/index.ts ProductFilm out/product-film.mp4",
+    "still": "remotion still src/index.ts ProductFilm"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.530",
+    "@types/react": "^19.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "^4.0.530",
+    "typescript": "^7.0.2"
+  }
+}
