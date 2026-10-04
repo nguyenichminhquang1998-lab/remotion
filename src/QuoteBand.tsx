@@ -24,8 +24,7 @@ export const THEMES: Record<'ivory' | 'navy', Theme> = {
 
 export type QuoteProps = {
 	theme: 'ivory' | 'navy';
-	headline: string[]; // each entry = one line, serif caps
-	support: string[]; // each entry = one line, sans caps
+	lines: string[]; // each entry = one line, bold sans
 };
 
 const inOut = Easing.bezier(0.65, 0, 0.25, 1);
@@ -83,7 +82,7 @@ const useFonts = () => {
 	}, [h]);
 };
 
-export const QuoteBand: React.FC<QuoteProps> = ({theme, headline, support}) => {
+export const QuoteBand: React.FC<QuoteProps> = ({theme, lines}) => {
 	useFonts();
 	const frame = useCurrentFrame();
 	const t = frame / QB_FPS;
@@ -119,13 +118,9 @@ export const QuoteBand: React.FC<QuoteProps> = ({theme, headline, support}) => {
 				<div style={{height: 40, marginBottom: 26, opacity: 1 - out}}>
 					<Star p={seg(t, 1.0, 1.7, lin)} color={C.gold} />
 				</div>
-				{headline.map((l, i) => (
-					<Words key={i} text={l} t={t} at={1.3 + i * 0.5} size={78} family={SERIF} weight={700} ls="0.01em" color={C.ink} out={out} />
-				))}
-				<div style={{width: 360 * soft(seg(t, 2.3, 3.1, lin)) * (1 - out), height: 2, margin: '34px 0 30px', background: `linear-gradient(90deg, transparent, ${C.gold}, transparent)`}} />
-				{support.map((l, i) => (
-					<div key={i} style={{marginTop: i ? 12 : 0}}>
-						<Words text={l} t={t} at={2.5 + i * 0.35} size={38} family={SANS} weight={700} ls="0.08em" color={C.sub} stagger={0.1} out={out} />
+				{lines.map((l, i) => (
+					<div key={i} style={{marginTop: i ? 16 : 0}}>
+						<Words text={l} t={t} at={1.4 + i * 0.55} size={54} family={SANS} weight={700} ls="0.02em" color={C.ink} stagger={0.1} out={out} />
 					</div>
 				))}
 			</div>
@@ -134,6 +129,5 @@ export const QuoteBand: React.FC<QuoteProps> = ({theme, headline, support}) => {
 };
 
 export const quoteDefaults: Omit<QuoteProps, 'theme'> = {
-	headline: ['TÀI SẢN CHO HÔM NAY'],
-	support: ['MÔI TRƯỜNG TRƯỞNG THÀNH', 'CHO NGÀY MAI'],
+	lines: ['“CÓ BAO NHIÊU CUỘC SỐNG', 'đã được lớn lên”', 'CÙNG NHỮNG NƠI MÌNH XÂY”'],
 };
