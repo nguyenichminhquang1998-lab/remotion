@@ -11,6 +11,8 @@ export const Root: React.FC = () => (
 		<Composition id="RoyalIsland" component={RoyalIsland} durationInFrames={RI_DURATION} fps={RI_FPS} width={RI_W} height={RI_H} />
 		<Composition id="QuoteBandIvory" component={QuoteBand} durationInFrames={QB_DURATION} fps={QB_FPS} width={QB_W} height={QB_H} defaultProps={{theme: 'ivory' as const, ...quoteDefaults}} />
 		<Composition id="QuoteBandIvorySans" component={QuoteBand} durationInFrames={QB_DURATION} fps={QB_FPS} width={QB_W} height={QB_H} defaultProps={{theme: 'ivory' as const, font: 'sans' as const, ...quoteDefaults}} />
+		<Composition id="QuoteBandIvory20" component={QuoteBand} durationInFrames={20 * QB_FPS} fps={QB_FPS} width={QB_W} height={QB_H} defaultProps={{theme: 'ivory' as const, pace: 1.5, outAt: 18.2, ...quoteDefaults}} />
+		<Composition id="QuoteBandIvorySans20" component={QuoteBand} durationInFrames={20 * QB_FPS} fps={QB_FPS} width={QB_W} height={QB_H} defaultProps={{theme: 'ivory' as const, font: 'sans' as const, pace: 1.5, outAt: 18.2, ...quoteDefaults}} />
 		<Composition id="QuoteBandNavy" component={QuoteBand} durationInFrames={QB_DURATION} fps={QB_FPS} width={QB_W} height={QB_H} defaultProps={{theme: 'navy' as const, ...quoteDefaults}} />
 	</>
 );

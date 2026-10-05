@@ -27,6 +27,8 @@ export type Block = {text: string; size: number; gap?: number; perChar?: number}
 export type QuoteProps = {
 	theme: 'ivory' | 'navy';
 	font?: 'androgyne' | 'sans';
+	pace?: number; // >1 writes slower
+	outAt?: number; // seconds when the exit starts (default: 2s after writing ends)
 	blocks: Block[]; // one block = one line, written on in order
 };
 
@@ -88,7 +90,7 @@ const useFonts = () => {
 	}, [h]);
 };
 
-export const QuoteBand: React.FC<QuoteProps> = ({theme, blocks, font = 'androgyne'}) => {
+export const QuoteBand: React.FC<QuoteProps> = ({theme, blocks, font = 'androgyne', pace = 1, outAt}) => {
 	const family = font === 'sans' ? SANS : BRAND;
 	const weight = font === 'sans' ? 700 : 600;
 	useFonts();
@@ -99,13 +101,13 @@ export const QuoteBand: React.FC<QuoteProps> = ({theme, blocks, font = 'androgyn
 	// schedule: lines are written on back to back
 	let cursor = 1.3;
 	const sched = blocks.map((b) => {
-		const perChar = b.perChar ?? 0.07;
-		const at = cursor + (b.gap ?? 0.25);
+		const perChar = (b.perChar ?? 0.07) * pace;
+		const at = cursor + (b.gap ?? 0.25) * pace;
 		cursor = at + Array.from(b.text).length * perChar + perChar * 3.2;
 		return {...b, perChar, at};
 	});
 	const writeEnd = cursor;
-	const OUT_AT = writeEnd + 2.0;
+	const OUT_AT = outAt ?? writeEnd + 2.0;
 
 	const open = inOut(seg(t, 0.15, 1.0, lin)) * (1 - inOut(seg(t, OUT_AT + 0.5, OUT_AT + 1.2, lin)));
 	const line = soft(seg(t, 0, 0.8, lin)) * (1 - soft(seg(t, OUT_AT + 0.9, OUT_AT + 1.3, lin)));
