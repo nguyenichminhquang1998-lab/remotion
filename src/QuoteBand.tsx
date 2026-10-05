@@ -47,8 +47,8 @@ const WriteOn: React.FC<{text: string; t: number; at: number; size: number; perC
 						key={i}
 						style={{
 							display: 'inline-block',
-							padding: '0.5em 0.04em 0.3em',
-							margin: '-0.5em -0.04em -0.3em',
+							padding: '0.5em 0.3em 0.3em',
+							margin: '-0.5em -0.3em -0.3em',
 							fontFamily: BRAND,
 							fontWeight: 600,
 							fontSize: size,
