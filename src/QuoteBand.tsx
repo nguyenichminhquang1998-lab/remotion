@@ -26,6 +26,7 @@ export const THEMES: Record<'ivory' | 'navy', Theme> = {
 export type Block = {text: string; size: number; gap?: number; perChar?: number};
 export type QuoteProps = {
 	theme: 'ivory' | 'navy';
+	font?: 'androgyne' | 'sans';
 	blocks: Block[]; // one block = one line, written on in order
 };
 
@@ -34,7 +35,7 @@ const soft = Easing.bezier(0.22, 1, 0.36, 1);
 const lin = (x: number) => x;
 
 /** Write-on: characters are revealed one after another, each with a soft left→right wipe. */
-const WriteOn: React.FC<{text: string; t: number; at: number; size: number; perChar: number; color: string; out: number}> = ({text, t, at, size, perChar, color, out}) => {
+const WriteOn: React.FC<{text: string; t: number; at: number; size: number; perChar: number; color: string; out: number; family: string; weight: number}> = ({text, t, at, size, perChar, color, out, family, weight}) => {
 	const chars = Array.from(text.normalize('NFC'));
 	const win = perChar * 3.2; // each glyph takes ~3 pen steps to ink in
 	return (
@@ -49,8 +50,8 @@ const WriteOn: React.FC<{text: string; t: number; at: number; size: number; perC
 							display: 'inline-block',
 							padding: '0.5em 0.3em 0.3em',
 							margin: '-0.5em -0.3em -0.3em',
-							fontFamily: BRAND,
-							fontWeight: 600,
+							fontFamily: family,
+							fontWeight: weight,
 							fontSize: size,
 							lineHeight: 1.25,
 							color,
@@ -87,7 +88,9 @@ const useFonts = () => {
 	}, [h]);
 };
 
-export const QuoteBand: React.FC<QuoteProps> = ({theme, blocks}) => {
+export const QuoteBand: React.FC<QuoteProps> = ({theme, blocks, font = 'androgyne'}) => {
+	const family = font === 'sans' ? SANS : BRAND;
+	const weight = font === 'sans' ? 700 : 600;
 	useFonts();
 	const frame = useCurrentFrame();
 	const t = frame / QB_FPS;
@@ -132,7 +135,7 @@ export const QuoteBand: React.FC<QuoteProps> = ({theme, blocks}) => {
 				</div>
 				{sched.map((b, i) => (
 					<div key={i} style={{marginTop: i === 0 ? 0 : i === 3 ? 8 : 0}}>
-						<WriteOn text={b.text} t={t} at={b.at} size={b.size} perChar={b.perChar} color={C.ink} out={out} />
+						<WriteOn text={b.text} t={t} at={b.at} size={font === 'sans' ? Math.round(b.size * 0.92) : b.size} perChar={b.perChar} color={C.ink} out={out} family={family} weight={weight} />
 					</div>
 				))}
 				<div style={{width: 300 * soft(seg(t, writeEnd + 0.1, writeEnd + 0.9, lin)) * (1 - out), height: 2, marginTop: 14, background: `linear-gradient(90deg, transparent, ${C.gold}, transparent)`}} />
