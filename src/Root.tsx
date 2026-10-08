@@ -6,6 +6,7 @@ import {QB_DURATION, QB_FPS, QB_H, QB_W, QuoteBand, quoteDefaults} from './Quote
 import {VY_DURATION, VY_FPS, VY_H, VY_W, VuYenText} from './VuYenText';
 import {SL_DURATION, SL_FPS, SL_H, SL_W, SaberLand} from './SaberLand';
 import {SCENES, TT_FPS, TT_H, TT_W, TropicText} from './TropicText';
+import {CLIPS, GT_FPS, GT_H, GT_W, GoldText} from './GoldText';
 import {DURATION, FPS, H, W} from './lib';
 
 export const Root: React.FC = () => (
@@ -25,5 +26,9 @@ export const Root: React.FC = () => (
 		<Composition id="TT04" component={TropicText} durationInFrames={Math.round(SCENES['04-the-tropic'].dur * TT_FPS)} fps={TT_FPS} width={TT_W} height={TT_H} defaultProps={{beats: SCENES['04-the-tropic'].beats}} />
 		<Composition id="TT05" component={TropicText} durationInFrames={Math.round(SCENES['05-gia-tri-ben-vung'].dur * TT_FPS)} fps={TT_FPS} width={TT_W} height={TT_H} defaultProps={{beats: SCENES['05-gia-tri-ben-vung'].beats}} />
 		<Composition id="TT06" component={TropicText} durationInFrames={Math.round(SCENES['06-noi-thoi-gian'].dur * TT_FPS)} fps={TT_FPS} width={TT_W} height={TT_H} defaultProps={{beats: SCENES['06-noi-thoi-gian'].beats}} />
+		<Composition id="G1" component={GoldText} durationInFrames={Math.round((9.6-7.6) * GT_FPS)} fps={GT_FPS} width={GT_W} height={GT_H} defaultProps={{lines: CLIPS[0].lines.map((l) => ({...l, in: {...l.in, a: l.in.a - 7.6, b: l.in.b - 7.6}, out: {...l.out, a: l.out.a - 7.6, b: l.out.b - 7.6}, ...(l.sheen ? {sheen: {a: l.sheen.a - 7.6, b: l.sheen.b - 7.6}} : {})}))}} />
+		<Composition id="G2" component={GoldText} durationInFrames={Math.round((17.4-13.0) * GT_FPS)} fps={GT_FPS} width={GT_W} height={GT_H} defaultProps={{lines: CLIPS[1].lines.map((l) => ({...l, in: {...l.in, a: l.in.a - 13.0, b: l.in.b - 13.0}, out: {...l.out, a: l.out.a - 13.0, b: l.out.b - 13.0}, ...(l.sheen ? {sheen: {a: l.sheen.a - 13.0, b: l.sheen.b - 13.0}} : {})}))}} />
+		<Composition id="G3" component={GoldText} durationInFrames={Math.round((21.1-17.6) * GT_FPS)} fps={GT_FPS} width={GT_W} height={GT_H} defaultProps={{lines: CLIPS[2].lines.map((l) => ({...l, in: {...l.in, a: l.in.a - 17.6, b: l.in.b - 17.6}, out: {...l.out, a: l.out.a - 17.6, b: l.out.b - 17.6}, ...(l.sheen ? {sheen: {a: l.sheen.a - 17.6, b: l.sheen.b - 17.6}} : {})}))}} />
+		<Composition id="G4" component={GoldText} durationInFrames={Math.round((29.0-26.4) * GT_FPS)} fps={GT_FPS} width={GT_W} height={GT_H} defaultProps={{lines: CLIPS[3].lines.map((l) => ({...l, in: {...l.in, a: l.in.a - 26.4, b: l.in.b - 26.4}, out: {...l.out, a: l.out.a - 26.4, b: l.out.b - 26.4}, ...(l.sheen ? {sheen: {a: l.sheen.a - 26.4, b: l.sheen.b - 26.4}} : {})}))}} />
 	</>
 );
