@@ -8,6 +8,7 @@ import {SL_DURATION, SL_FPS, SL_H, SL_W, SaberLand} from './SaberLand';
 import {SCENES, TT_FPS, TT_H, TT_W, TropicText} from './TropicText';
 import {CLIPS, GT_FPS, GT_H, GT_W, GoldText} from './GoldText';
 import {CLIPS as SCLIPS, TS_FPS, TS_H, TS_W, TropicScript} from './TropicScript';
+import {QT_DURATION, QT_FPS, QT_H, QT_W, QuietText} from './QuietText';
 import {DURATION, FPS, H, W} from './lib';
 
 export const Root: React.FC = () => (
@@ -36,5 +37,6 @@ export const Root: React.FC = () => (
 				<Composition key={c.name + v} id={`S${c.id}${v === 'cool' ? 'C' : 'B'}`} component={TropicScript} durationInFrames={Math.round(c.dur * TS_FPS)} fps={TS_FPS} width={TS_W} height={TS_H} defaultProps={{beat: c.beat, variant: v}} />
 			)),
 		)}
+		<Composition id="QuietText" component={QuietText} durationInFrames={QT_DURATION} fps={QT_FPS} width={QT_W} height={QT_H} />
 	</>
 );
