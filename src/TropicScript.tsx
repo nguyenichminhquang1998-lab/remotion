@@ -2,6 +2,7 @@ import React from 'react';
 import {AbsoluteFill, Easing, continueRender, delayRender, useCurrentFrame} from 'remotion';
 import './fonts/montserrat.css';
 import './fonts/alexbrush.css';
+import './fonts/courgette.css';
 import {lerp, seg} from './lib';
 import {SCENES, TBeat, TLine} from './TropicText';
 
@@ -9,13 +10,15 @@ export const TS_FPS = 30;
 export const TS_W = 1080;
 export const TS_H = 1920;
 
-export type Variant = 'cool' | 'bronze';
+export type Variant = 'cool' | 'bronze' | 'white';
 const SCRIPT = "'Alex Brush', 'Great Vibes', cursive";
+const BRUSH = "'Courgette', 'Be Vietnam Pro', cursive";
 const THIN = "'Montserrat', 'Be Vietnam Pro', sans-serif";
 const MAXW = 960;
 const GAP = 6;
 
 const PAL = {
+	white: {g: '', thin: '#FFFFFF', outline: 'rgba(0,0,0,0.9)', glow: 'rgba(0,0,0,0)'},
 	cool: {
 		g: 'linear-gradient(180deg,#FFFFFF 0%,#E8ECF2 50%,#B6BFCC 100%)',
 		thin: '#EEF2F7',
@@ -38,6 +41,7 @@ const useFonts = () => {
 	React.useEffect(() => {
 		Promise.all([
 			document.fonts.load("400 60px 'Alex Brush'", 'Chuẩn Sống ẳạỡ'),
+			document.fonts.load("400 60px 'Courgette'", 'Chuẩn Sống ẳạỡệị'),
 			document.fonts.load("300 30px 'Montserrat'", 'ÀỞỮ…'),
 			document.fonts.load("400 30px 'Montserrat'", 'ÀỞỮ…'),
 		]).then(() => continueRender(h));
@@ -54,7 +58,7 @@ const View: React.FC<{b: TBeat; v: Variant}> = ({b, v}) => {
 		b.lines.forEach((l, i) => {
 			const el = refs.current[i];
 			if (!el) return;
-			const size = (l.size ?? BASE[l.k]) * (l.k === 'accent' ? 1.22 : l.k === 'white' ? 0.82 : 0.88);
+			const size = (l.size ?? BASE[l.k]) * (l.k === 'accent' ? (v === 'white' ? 0.92 : 1.22) : l.k === 'white' ? 0.82 : 0.88);
 			el.style.fontSize = `${size}px`;
 			const w = el.offsetWidth;
 			if (w > MAXW) el.style.fontSize = `${(size * MAXW) / w}px`;
@@ -86,7 +90,18 @@ const View: React.FC<{b: TBeat; v: Variant}> = ({b, v}) => {
 					margin: '-0.22em -0.3em',
 					lineHeight: 1.1,
 				};
-				if (accent) {
+				if (accent && v === 'white') {
+					// brush script: thick white letters, black outline + long soft drop shadow (as in the reference)
+					const o = Math.max(2, (l.size ?? BASE.accent) * 0.016);
+					const ring = [[-1, -1], [1, -1], [-1, 1], [1, 1], [0, -1], [0, 1], [-1, 0], [1, 0]].map(([x, y]) => `${x * o}px ${y * o}px 0 #000`).join(', ');
+					Object.assign(inner, {
+						fontFamily: BRUSH,
+						fontWeight: 400,
+						color: '#fff',
+						WebkitTextStroke: `${o * 1.2}px #fff`,
+						textShadow: `${ring}, ${o * 2.4}px ${o * 3.4}px ${o * 3}px rgba(0,0,0,0.5)`,
+					});
+				} else if (accent) {
 					Object.assign(inner, {
 						fontFamily: SCRIPT,
 						fontWeight: 400,
@@ -100,10 +115,10 @@ const View: React.FC<{b: TBeat; v: Variant}> = ({b, v}) => {
 				} else {
 					Object.assign(inner, {
 						fontFamily: THIN,
-						fontWeight: l.k === 'white' ? 400 : 300,
+						fontWeight: v === 'white' ? (l.k === 'white' ? 500 : 400) : l.k === 'white' ? 400 : 300,
 						color: P.thin,
 						letterSpacing: `${lerp(0.3, 0.14, e)}em`,
-						textShadow: `0 1px 2px rgba(0,0,0,0.5), 0 3px 12px rgba(0,0,0,0.45)`,
+						textShadow: v === 'white' ? '0 1px 1px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.6), 3px 5px 8px rgba(0,0,0,0.4)' : `0 1px 2px rgba(0,0,0,0.55), 0 3px 12px rgba(0,0,0,0.5)`,
 					});
 				}
 				return (

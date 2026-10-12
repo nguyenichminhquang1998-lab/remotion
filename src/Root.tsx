@@ -33,8 +33,8 @@ export const Root: React.FC = () => (
 		<Composition id="G3" component={GoldText} durationInFrames={Math.round((21.1-17.6) * GT_FPS)} fps={GT_FPS} width={GT_W} height={GT_H} defaultProps={{lines: CLIPS[2].lines.map((l) => ({...l, in: {...l.in, a: l.in.a - 17.6, b: l.in.b - 17.6}, out: {...l.out, a: l.out.a - 17.6, b: l.out.b - 17.6}, ...(l.sheen ? {sheen: {a: l.sheen.a - 17.6, b: l.sheen.b - 17.6}} : {})}))}} />
 		<Composition id="G4" component={GoldText} durationInFrames={Math.round((29.0-26.4) * GT_FPS)} fps={GT_FPS} width={GT_W} height={GT_H} defaultProps={{lines: CLIPS[3].lines.map((l) => ({...l, in: {...l.in, a: l.in.a - 26.4, b: l.in.b - 26.4}, out: {...l.out, a: l.out.a - 26.4, b: l.out.b - 26.4}, ...(l.sheen ? {sheen: {a: l.sheen.a - 26.4, b: l.sheen.b - 26.4}} : {})}))}} />
 		{SCLIPS.flatMap((c) =>
-			(['cool', 'bronze'] as const).map((v) => (
-				<Composition key={c.name + v} id={`S${c.id}${v === 'cool' ? 'C' : 'B'}`} component={TropicScript} durationInFrames={Math.round(c.dur * TS_FPS)} fps={TS_FPS} width={TS_W} height={TS_H} defaultProps={{beat: c.beat, variant: v}} />
+			(['cool', 'bronze', 'white'] as const).map((v) => (
+				<Composition key={c.name + v} id={`S${c.id}${v === 'cool' ? 'C' : v === 'bronze' ? 'B' : 'W'}`} component={TropicScript} durationInFrames={Math.round(c.dur * TS_FPS)} fps={TS_FPS} width={TS_W} height={TS_H} defaultProps={{beat: c.beat, variant: v}} />
 			)),
 		)}
 		<Composition id="QuietText" component={QuietText} durationInFrames={QT_DURATION} fps={QT_FPS} width={QT_W} height={QT_H} />
