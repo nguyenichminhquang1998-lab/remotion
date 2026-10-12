@@ -2,7 +2,7 @@ import os, re, subprocess, sys, shutil
 B='/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell'
 ids=[('S01','01-dep-la-dieu'),('S02a','02a-chuan-song'),('S02b','02b-cam-nhan'),('S03','03-kien-tao-boi'),('S04a','04a-the-tropic-quoc-te'),('S04b','04b-kien-truc-nhiet-doi'),('S04c','04c-khong-gian-khac-biet'),('S05a','05a-gia-tri-ben-vung'),('S05b','05b-phap-ly-minh-bach'),('S06','06-noi-thoi-gian')]
 os.makedirs('out/tropic_w',exist_ok=True)
-for v,vn in (('W','trang-vien-den'),):
+for v,vn in (('W','trang-cung-mem'),):
     for cid,name in ids:
         comp=f'{cid}{v}'; d=f'out/seq_{comp}'
         shutil.rmtree(d,ignore_errors=True)

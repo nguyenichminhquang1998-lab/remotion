@@ -3,6 +3,7 @@ import {AbsoluteFill, Easing, continueRender, delayRender, useCurrentFrame} from
 import './fonts/montserrat.css';
 import './fonts/alexbrush.css';
 import './fonts/courgette.css';
+import './fonts/playball.css';
 import {lerp, seg} from './lib';
 import {SCENES, TBeat, TLine} from './TropicText';
 
@@ -12,9 +13,10 @@ export const TS_H = 1920;
 
 export type Variant = 'cool' | 'bronze' | 'white';
 const SCRIPT = "'Alex Brush', 'Great Vibes', cursive";
-const BRUSH = "'Courgette', 'Be Vietnam Pro', cursive";
+const BRUSH = "'Playball', 'Courgette', cursive";
 const THIN = "'Montserrat', 'Be Vietnam Pro', sans-serif";
 const MAXW = 960;
+const HARD_ACCENT = /^vinhomes$/i;
 const GAP = 6;
 
 const PAL = {
@@ -41,7 +43,9 @@ const useFonts = () => {
 	React.useEffect(() => {
 		Promise.all([
 			document.fonts.load("400 60px 'Alex Brush'", 'Chuẩn Sống ẳạỡ'),
-			document.fonts.load("400 60px 'Courgette'", 'Chuẩn Sống ẳạỡệị'),
+			document.fonts.load("400 60px 'Playball'", 'Chuẩn Sống ẳạỡệị'),
+			document.fonts.load("700 30px 'Montserrat'", 'ÀỞỮỆỊẠ…'),
+			document.fonts.load("800 30px 'Montserrat'", 'ÀỞỮỆỊẠ…'),
 			document.fonts.load("300 30px 'Montserrat'", 'ÀỞỮ…'),
 			document.fonts.load("400 30px 'Montserrat'", 'ÀỞỮ…'),
 		]).then(() => continueRender(h));
@@ -58,7 +62,7 @@ const View: React.FC<{b: TBeat; v: Variant}> = ({b, v}) => {
 		b.lines.forEach((l, i) => {
 			const el = refs.current[i];
 			if (!el) return;
-			const size = (l.size ?? BASE[l.k]) * (l.k === 'accent' ? (v === 'white' ? 0.92 : 1.22) : l.k === 'white' ? 0.82 : 0.88);
+			const size = (l.size ?? BASE[l.k]) * (l.k === 'accent' ? (v === 'white' ? (HARD_ACCENT.test(l.t) ? 0.7 : 1.0) : 1.22) : l.k === 'white' ? (v === 'white' ? 1.0 : 0.82) : v === 'white' ? 1.2 : 0.88);
 			el.style.fontSize = `${size}px`;
 			const w = el.offsetWidth;
 			if (w > MAXW) el.style.fontSize = `${(size * MAXW) / w}px`;
@@ -90,18 +94,25 @@ const View: React.FC<{b: TBeat; v: Variant}> = ({b, v}) => {
 					margin: '-0.22em -0.3em',
 					lineHeight: 1.1,
 				};
-				if (accent && v === 'white') {
-					// brush script: thick white letters, black outline + long soft drop shadow (as in the reference)
-					const o = Math.max(2, (l.size ?? BASE.accent) * 0.016);
-					const ring = [[-1, -1], [1, -1], [-1, 1], [1, 1], [0, -1], [0, 1], [-1, 0], [1, 0]].map(([x, y]) => `${x * o}px ${y * o}px 0 #000`).join(', ');
+				const hardAccent = accent && v === 'white' && HARD_ACCENT.test(l.t);
+				if (accent && v === 'white' && !hardAccent) {
+					// soft brush script (Playball): thick white letters, black outline + soft drop shadow, like the reference
+					const size = l.size ?? BASE.accent;
+					const w = size * 0.046;
+					const r = w / 2 + Math.max(2, size * 0.012);
+					const ring = Array.from({length: 16}, (_, k) => {
+						const a = (k / 16) * Math.PI * 2;
+						return `${(Math.cos(a) * r).toFixed(2)}px ${(Math.sin(a) * r).toFixed(2)}px 0 #000`;
+					}).join(', ');
 					Object.assign(inner, {
 						fontFamily: BRUSH,
 						fontWeight: 400,
 						color: '#fff',
-						WebkitTextStroke: `${o * 1.2}px #fff`,
-						textShadow: `${ring}, ${o * 2.4}px ${o * 3.4}px ${o * 3}px rgba(0,0,0,0.5)`,
+						WebkitTextStroke: `${w}px #fff`,
+						paintOrder: 'stroke fill',
+						textShadow: `${ring}, ${r * 1.6}px ${r * 2.4}px ${r * 2.2}px rgba(0,0,0,0.5)`,
 					});
-				} else if (accent) {
+				} else if (accent && !hardAccent) {
 					Object.assign(inner, {
 						fontFamily: SCRIPT,
 						fontWeight: 400,
@@ -112,13 +123,23 @@ const View: React.FC<{b: TBeat; v: Variant}> = ({b, v}) => {
 						color: 'transparent',
 						filter: `drop-shadow(0 0 0.9px ${P.outline}) drop-shadow(0 0 0.9px ${P.outline}) drop-shadow(0 4px 10px rgba(0,0,0,0.45)) drop-shadow(0 0 16px ${P.glow})`,
 					});
+				} else if (v === 'white') {
+					// hard type (Montserrat Bold caps, like the "VINHOMES" line of the reference)
+					Object.assign(inner, {
+						fontFamily: THIN,
+						fontWeight: hardAccent || l.k === 'white' ? 800 : 700,
+						textTransform: 'uppercase',
+						color: '#fff',
+						letterSpacing: `${lerp(0.34, hardAccent ? 0.14 : 0.2, e)}em`,
+						textShadow: '1.5px 1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px -1.5px 0 #000, 0 1.5px 0 #000, 0 -1.5px 0 #000, 1.5px 0 0 #000, -1.5px 0 0 #000, 3px 5px 7px rgba(0,0,0,0.5)',
+					});
 				} else {
 					Object.assign(inner, {
 						fontFamily: THIN,
-						fontWeight: v === 'white' ? (l.k === 'white' ? 500 : 400) : l.k === 'white' ? 400 : 300,
+						fontWeight: l.k === 'white' ? 400 : 300,
 						color: P.thin,
 						letterSpacing: `${lerp(0.3, 0.14, e)}em`,
-						textShadow: v === 'white' ? '0 1px 1px rgba(0,0,0,0.7), 0 2px 6px rgba(0,0,0,0.6), 3px 5px 8px rgba(0,0,0,0.4)' : `0 1px 2px rgba(0,0,0,0.55), 0 3px 12px rgba(0,0,0,0.5)`,
+						textShadow: `0 1px 2px rgba(0,0,0,0.55), 0 3px 12px rgba(0,0,0,0.5)`,
 					});
 				}
 				return (
