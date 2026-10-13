@@ -32,8 +32,9 @@ type Item = {
 type Rule = {rule: true; x: number; y: number; w: number; delay: number};
 type Entry = Item | Rule;
 
-// Bickham Script Pro 3 (Adobe Fonts, commercial) is not installable in this sandbox -> 'Birthstone' is the stand-in.
-// To use the real font: add a @font-face named 'Bickham Script Pro 3' and put it first here.
+// Hero script = Bickham Script Pro (customer-supplied "Việt hóa" file). That file only covers ~36 of the 134 Vietnamese
+// letters, so the missing ones used by the hero words were added by composing base + accent glyphs
+// (BickhamScriptPro-*-vi.otf, built with fontTools). Birthstone remains only as a fallback.
 const SIGN = "'Bickham Script Pro 3', 'Birthstone', 'Great Vibes', cursive";
 const SERIF = "'Cormorant Garamond', 'Playfair Display', serif"; // italic only (board: Cormorant Garamond Italic)
 const SANS = "'Montserrat', 'Be Vietnam Pro', sans-serif";
@@ -76,8 +77,8 @@ const LAYOUT: Record<string, Entry[]> = {
 	// The Tropic nơi chuẩn sống quốc tế
 	'04a': [
 		{t: 'The Tropic', role: 'hero', size: 400, x: 540, y: 705, delay: 0, motion: 'write'},
-		{t: 'NƠI CHUẨN SỐNG', role: 'sans', size: 38, x: 990, y: 945, a: 'r', delay: 0.9, motion: 'track', track: 0.4},
-		{t: 'quốc tế', role: 'hero', size: 250, x: 560, y: 1085, delay: 1.3, motion: 'write'},
+		{t: 'NƠI CHUẨN SỐNG', role: 'sans', size: 38, x: 990, y: 925, a: 'r', delay: 0.9, motion: 'track', track: 0.4},
+		{t: 'quốc tế', role: 'hero', size: 250, x: 560, y: 1105, delay: 1.3, motion: 'write'},
 	],
 	// giao hòa cùng kiến trúc nhiệt đới hiện đại
 	'04b': [
@@ -100,8 +101,8 @@ const LAYOUT: Record<string, Entry[]> = {
 	// được bảo chứng bởi nền tảng pháp lý minh bạch
 	'05b': [
 		{t: 'ĐƯỢC BẢO CHỨNG BỞI', role: 'sans', size: 34, x: 540, y: 650, a: 'c', delay: 0, motion: 'track', track: 0.4},
-		{t: 'nền tảng pháp lý', role: 'hero', size: 210, x: 540, y: 790, delay: 0.4, motion: 'rise'},
-		{t: 'minh bạch', role: 'hero', size: 320, x: 640, y: 1010, delay: 1.0, motion: 'write'},
+		{t: 'nền tảng pháp lý', role: 'hero', size: 210, x: 540, y: 775, delay: 0.4, motion: 'rise'},
+		{t: 'minh bạch', role: 'hero', size: 320, x: 640, y: 1060, delay: 1.0, motion: 'write'},
 	],
 	// The Tropic nơi thời gian làm nên giá trị
 	'06': [
@@ -121,6 +122,7 @@ const useFonts = () => {
 	React.useEffect(() => {
 		const s = 'Đẹp chuẩn sống ẳạỡệịẾỜ';
 		Promise.all([
+			document.fonts.load("400 60px 'Bickham Script Pro 3'", s),
 			document.fonts.load("400 60px 'Birthstone'", s),
 			document.fonts.load("italic 400 40px 'Cormorant Garamond'", s),
 			document.fonts.load("italic 500 40px 'Cormorant Garamond'", s),
