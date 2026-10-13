@@ -41,8 +41,9 @@ const SANS = "'Montserrat', 'Be Vietnam Pro', sans-serif";
 
 // Birthstone has a small x-height next to the board's signature script, so accents are scaled up
 const HERO_K = 1.75;
-const IVORY = '#F4EBDA';
-const GOLD_G = 'linear-gradient(180deg,#FFF8EA 0%,#F5E2BC 48%,#DDBB82 100%)';
+// Palette from the board's swatches: ivory #ECDBC5 (text), taupe #967D67, bronze #8D6445 (rules)
+const IVORY = '#F1E4CF';
+const GOLD_G = 'linear-gradient(180deg,#FBF4E6 0%,#EFDFC8 55%,#DDC7A7 100%)'; // ivory, very slight depth
 
 const L = (id: string): Entry[] => LAYOUT[id];
 const LAYOUT: Record<string, Entry[]> = {
@@ -83,14 +84,14 @@ const LAYOUT: Record<string, Entry[]> = {
 	// giao hòa cùng kiến trúc nhiệt đới hiện đại
 	'04b': [
 		{t: 'GIAO HÒA CÙNG', role: 'sans', size: 36, x: 90, y: 650, a: 'l', delay: 0, motion: 'track', track: 0.4},
-		{t: 'kiến trúc nhiệt đới', role: 'hero', size: 210, x: 500, y: 790, delay: 0.4, motion: 'write'},
+		{t: 'kiến trúc nhiệt đới', role: 'serifI', size: 116, x: 540, y: 780, a: 'c', delay: 0.4, motion: 'rise', track: 0.04, weight: 500},
 		{t: 'hiện đại', role: 'hero', size: 330, x: 640, y: 1010, delay: 1.0, motion: 'write'},
 	],
 	// kiến tạo một không gian sống khác biệt
 	'04c': [
 		{t: 'KIẾN TẠO MỘT', role: 'sans', size: 36, x: 990, y: 650, a: 'r', delay: 0, motion: 'track', track: 0.4},
-		{t: 'không gian sống', role: 'hero', size: 220, x: 600, y: 790, delay: 0.4, motion: 'rise'},
-		{t: 'khác biệt', role: 'hero', size: 340, x: 450, y: 1010, delay: 1.0, motion: 'write'},
+		{t: 'không gian sống', role: 'serifI', size: 116, x: 90, y: 790, a: 'l', delay: 0.4, motion: 'rise', track: 0.04, weight: 500},
+		{t: 'khác biệt', role: 'hero', size: 350, x: 560, y: 1010, delay: 1.0, motion: 'write'},
 	],
 	// và giá trị bền vững
 	'05a': [
@@ -101,7 +102,7 @@ const LAYOUT: Record<string, Entry[]> = {
 	// được bảo chứng bởi nền tảng pháp lý minh bạch
 	'05b': [
 		{t: 'ĐƯỢC BẢO CHỨNG BỞI', role: 'sans', size: 34, x: 540, y: 650, a: 'c', delay: 0, motion: 'track', track: 0.4},
-		{t: 'nền tảng pháp lý', role: 'hero', size: 210, x: 540, y: 775, delay: 0.4, motion: 'rise'},
+		{t: 'nền tảng pháp lý', role: 'serifI', size: 116, x: 540, y: 785, a: 'c', delay: 0.4, motion: 'rise', track: 0.04, weight: 500},
 		{t: 'minh bạch', role: 'hero', size: 320, x: 640, y: 1060, delay: 1.0, motion: 'write'},
 	],
 	// The Tropic nơi thời gian làm nên giá trị
@@ -169,7 +170,7 @@ const View: React.FC<{items: Entry[]; inAt: number; outAt: number; ready: boolea
 								width: it.w,
 								height: 1.5,
 								marginLeft: it.x > 300 && it.x < 800 ? -it.w / 2 : 0,
-								background: 'linear-gradient(90deg,rgba(235,205,150,0),#EBCD96 30%,#EBCD96 70%,rgba(235,205,150,0))',
+								background: 'linear-gradient(90deg,rgba(184,132,84,0),#B88454 30%,#D2A06B 50%,#B88454 70%,rgba(184,132,84,0))',
 								transformOrigin: 'center',
 								transform: `scaleX(${p})`,
 								opacity: (1 - out) * Math.min(1, p * 3),
@@ -256,8 +257,8 @@ const View: React.FC<{items: Entry[]; inAt: number; outAt: number; ready: boolea
 						backgroundClip: 'text',
 						WebkitTextFillColor: 'transparent',
 						color: 'transparent',
-						WebkitTextStroke: `${Math.max(0.6, it.size * 0.0028)}px rgba(244,226,186,0.9)`,
-						filter: 'drop-shadow(0 2px 9px rgba(0,0,0,0.32)) drop-shadow(0 0 14px rgba(255,226,170,0.22))',
+						WebkitTextStroke: `${Math.max(0.6, it.size * 0.0028)}px rgba(240,226,204,0.9)`,
+						filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.30)) drop-shadow(0 0 10px rgba(255,240,215,0.14))',
 					});
 				} else if (it.role === 'sans' || (it.role === 'serif' && !it.gold)) {
 					Object.assign(inner, {
@@ -268,7 +269,7 @@ const View: React.FC<{items: Entry[]; inAt: number; outAt: number; ready: boolea
 						letterSpacing: `${spacing}em`,
 						marginRight: a === 'c' ? undefined : `${-spacing}em`,
 						paddingLeft: a === 'c' ? `${spacing}em` : '0.35em',
-						textShadow: '0 1px 10px rgba(0,0,0,0.45)',
+						textShadow: '0 1px 8px rgba(0,0,0,0.38)',
 					});
 				} else {
 					const italic = it.role === 'serifI';
@@ -286,10 +287,10 @@ const View: React.FC<{items: Entry[]; inAt: number; outAt: number; ready: boolea
 							backgroundClip: 'text',
 							WebkitTextFillColor: 'transparent',
 							color: 'transparent',
-							filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.42)) drop-shadow(0 0 16px rgba(255,226,170,0.3))',
+							filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.32))',
 						});
 					} else {
-						Object.assign(inner, common, {color: IVORY, textShadow: '0 1px 10px rgba(0,0,0,0.45)'});
+						Object.assign(inner, common, {color: IVORY, textShadow: '0 1px 8px rgba(0,0,0,0.38)'});
 					}
 				}
 
